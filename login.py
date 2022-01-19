@@ -35,9 +35,9 @@ def verifyUser():
             if row:
                 # If password validate successful
                 if row[2] == _password:
-                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4])  # Login Successful
+                    return jsonify(loginStatus=2, userId=row[0], activationStatus=row[4])  # Login Successful
                 else:
-                    return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
+                    return jsonify(loginStatus=1, userId=0, activationStatus=0)  # Invalid credential
             else:
                 sql = "SELECT * FROM tbl_alumni WHERE studentId=%s"
                 data = _username
@@ -63,14 +63,14 @@ def verifyUser():
                         row3 = cursor.fetchone()
 
                         if row3:
-                            return jsonify(loginStatus=2, userID=row3[0], activationStatus=row3[4])
+                            return jsonify(loginStatus=2, userId=row3[0], activationStatus=row3[4])
                         else:
-                            return jsonify(loginStatus=1, userID=0, activationStatus=0)
+                            return jsonify(loginStatus=1, userId=0, activationStatus=0)
                     else:
-                        return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
+                        return jsonify(loginStatus=1, userId=0, activationStatus=0)  # Invalid credential
 
                 else:
-                    return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
+                    return jsonify(loginStatus=1, userId=0, activationStatus=0)  # Invalid credential
         else:
             return not_found()
     except Exception as e:
@@ -85,20 +85,20 @@ def verifyUser():
 def resetPassword():
     try:
         _json = request.json
-        _userID = _json['userID']
+        _userId = _json['userId']
         _password = _json['password']
-        if _userID and _password and request.method == 'POST':
+        if _userId and _password and request.method == 'POST':
 
-            sql = "SELECT * FROM tbl_user WHERE userID=%s"
-            data = _userID
+            sql = "SELECT * FROM tbl_user WHERE userId=%s"
+            data = _userId
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sql, data)
             row = cursor.fetchone()
             if row:
                 if row[4] == 0:
-                    sql = "UPDATE tbl_user set password=%s, activationStatus=10 where userID=%s"
-                    data = (_password, _userID)
+                    sql = "UPDATE tbl_user set password=%s, activationStatus=10 where userId=%s"
+                    data = (_password, _userId)
                     conn = mysql.connect()
                     cursor = conn.cursor()
                     cursor.execute(sql, data)
@@ -107,8 +107,8 @@ def resetPassword():
                     resp.status_code = 200
                     return resp
                 else:
-                    sql = "UPDATE tbl_user set password=%s where userID=%s"
-                    data = (_password, _userID)
+                    sql = "UPDATE tbl_user set password=%s where userId=%s"
+                    data = (_password, _userId)
                     conn = mysql.connect()
                     cursor = conn.cursor()
                     cursor.execute(sql, data)
@@ -134,14 +134,14 @@ def resetPassword():
 def updateProfile():
     try:
         _json = request.json
-        _userID = _json['userID']
+        _userId = _json['userId']
         _email = _json['email']
         _handphone = _json['handphone']
         _telephone = _json['telephone']
-        if _userID and _email and _handphone and _telephone and request.method == 'POST':
+        if _userId and _email and _handphone and _telephone and request.method == 'POST':
 
-            sql = "SELECT * FROM tbl_user WHERE userID=%s"
-            data = _userID
+            sql = "SELECT * FROM tbl_user WHERE userId=%s"
+            data = _userId
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sql, data)
@@ -155,8 +155,8 @@ def updateProfile():
                 cursor.execute(sql, data)
                 conn.commit()
 
-                sql = "UPDATE tbl_user set activationStatus=20 where userID=%s"
-                data = _userID
+                sql = "UPDATE tbl_user set activationStatus=20 where userId=%s"
+                data = _userId
                 conn = mysql.connect()
                 cursor = conn.cursor()
                 cursor.execute(sql, data)
