@@ -4,6 +4,7 @@ from login import *
 from otp_controller import *
 from faq_controller import *
 from faq_category_controller import *
+from banner_controller import *
 
 
 @app.route("/")
