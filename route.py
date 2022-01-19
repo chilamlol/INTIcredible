@@ -2,6 +2,8 @@ from event_controller import *
 from alumni_controller import *
 from login import *
 from otp_controller import *
+from faq_controller import *
+from faq_category_controller import *
 
 
 @app.route("/")
