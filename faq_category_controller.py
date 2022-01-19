@@ -7,7 +7,7 @@ from flask import request
 
 # add FAQ category
 @app.route('/faq/category/add', methods=['POST'])
-def add_faqCategory():
+def add_faq_category():
     conn = None
     cursor = None
     try:
@@ -32,7 +32,7 @@ def add_faqCategory():
         print(e)
 
 
-# list all events
+# list all FAQ category
 @app.route('/faq/category')
 def show_all_faq_category():
     try:
@@ -47,12 +47,13 @@ def show_all_faq_category():
         print(e)
 
 
-@app.route('/faq/category/<int:id>')
-def show_faq_category(id):
+# list specific FAQ category
+@app.route('/faq/category/<int:faqCatId>')
+def show_faq_category(faqCatId):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM tbl_faq_category WHERE faqCatId=%s", id)
+        cursor.execute("SELECT * FROM tbl_faq_category WHERE faqCatId=%s", faqCatId)
         row = cursor.fetchone()
         resp = jsonify(row)
         resp.status_code = 200
@@ -64,30 +65,25 @@ def show_faq_category(id):
         conn.close()
 
 
-# Update event
-@app.route('/event/update/<int:id>', methods=['POST'])
-def update_event(id):
+# Update FAQ category
+@app.route('/faq/category/update/<int:faqCatId>', methods=['POST'])
+def update_faq_category(faqCatId):
     conn = None
     cursor = None
     try:
         _json = request.json
         _name = _json['name']
-        _description = _json['description']
-        _image = _json['image']
-        _registerLink = _json['registerLink']
-        _startDate = _json['startDate']
-        _endDate = _json['endDate']
-        _status = _json['status']
+        _recordStatus = _json['recordStatus']
         # validate the received values
-        if _name and _description and _image and _registerLink and _startDate and _endDate and _status and request.method == 'POST':
+        if _name and _recordStatus and request.method == 'POST':
             # save edits
-            sql = "UPDATE tbl_event SET name=%s, description=%s, image=%s, registerLink=%s, startDate=%s, endDate=%s, status=%s WHERE eventId=%s"
-            data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status, id)
+            sql = "UPDATE tbl_faq_category SET name=%s, recordStatus=%s WHERE faqCatId=%s"
+            data = (_name, _recordStatus, faqCatId)
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sql, data)
             conn.commit()
-            resp = jsonify('Event updated successfully!')
+            resp = jsonify('FAQ category updated successfully!')
             resp.status_code = 200
             return resp
         else:
@@ -99,15 +95,15 @@ def update_event(id):
         conn.close()
 
 
-# Delete Event
-@app.route('/event/delete/<int:id>')
-def delete_event(id):
+# Delete FAQ category
+@app.route('/faq/category/delete/<int:faqCatId>')
+def delete_faq_category(faqCatId):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_event WHERE eventId=%s", id)
+        cursor.execute("DELETE FROM tbl_faq_category WHERE faqCatId=%s", faqCatId)
         conn.commit()
-        resp = jsonify('Event deleted successfully!')
+        resp = jsonify('FAQ category deleted successfully!')
         resp.status_code = 200
         return resp
     except Exception as e:
