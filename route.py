@@ -1,7 +1,8 @@
-from eventController import *
-from alumniController import *
+from event_controller import *
+from alumni_controller import *
 from login import *
-from otpService import *
+from otp_controller import *
+
 
 @app.route("/")
 def home():

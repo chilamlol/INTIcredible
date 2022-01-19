@@ -4,6 +4,7 @@ from db_config import mysql
 from flask import jsonify
 from flask import request
 
+
 # add events
 @app.route('/event/add', methods=['POST'])
 def add_event():
@@ -51,12 +52,13 @@ def show_all_event():
         print(e)
 
 
-@app.route('/event/<int:id>')
-def show_event(id):
+# list specific event
+@app.route('/event/<int:eventId>')
+def show_event(eventId):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM tbl_event WHERE eventId=%s", id)
+        cursor.execute("SELECT * FROM tbl_event WHERE eventId=%s", eventId)
         row = cursor.fetchone()
         resp = jsonify(row)
         resp.status_code = 200
@@ -69,8 +71,8 @@ def show_event(id):
 
 
 # Update event
-@app.route('/event/update/<int:id>', methods=['POST'])
-def update_event(id):
+@app.route('/event/update/<int:eventId>', methods=['POST'])
+def update_event(eventId):
     conn = None
     cursor = None
     try:
@@ -86,7 +88,7 @@ def update_event(id):
         if _name and _description and _image and _registerLink and _startDate and _endDate and _status and request.method == 'POST':
             # save edits
             sql = "UPDATE tbl_event SET name=%s, description=%s, image=%s, registerLink=%s, startDate=%s, endDate=%s, status=%s WHERE eventId=%s"
-            data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status, id)
+            data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status, eventId)
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sql, data)
@@ -104,12 +106,12 @@ def update_event(id):
 
 
 # Delete Event
-@app.route('/event/delete/<int:id>')
-def delete_event(id):
+@app.route('/event/delete/<int:eventId>')
+def delete_event(eventId):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_event WHERE eventId=%s", id)
+        cursor.execute("DELETE FROM tbl_event WHERE eventId=%s", eventId)
         conn.commit()
         resp = jsonify('Event deleted successfully!')
         resp.status_code = 200

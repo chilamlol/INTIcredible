@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import request
 
 
-# add events
+# add alumni
 @app.route('/alumni/add', methods=['POST'])
 def add_alumni():
     conn = None
@@ -56,12 +56,13 @@ def show_all_alumni():
         print(e)
 
 
-@app.route('/alumni/<int:id>')
-def show_alumni(id):
+# list specific alumni
+@app.route('/alumni/<int:alumniId>')
+def show_alumni(alumniId):
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM tbl_alumni WHERE alumniId=%s", id)
+        cursor.execute("SELECT * FROM tbl_alumni WHERE alumniId=%s", alumniId)
         row = cursor.fetchone()
         resp = jsonify(row)
         resp.status_code = 200
@@ -73,9 +74,9 @@ def show_alumni(id):
         conn.close()
 
 
-# Update event
-@app.route('/alumni/update/<int:id>', methods=['POST'])
-def update_alumni(id):
+# Update alumni
+@app.route('/alumni/update/<int:alumniId>', methods=['POST'])
+def update_alumni(alumniId):
     conn = None
     cursor = None
     try:
@@ -95,7 +96,7 @@ def update_alumni(id):
         if _name and _identificationCard and _studentId and _personalEmail and _graduatingCampus and _yearOfGraduation and _graduatingProgramme and _graduatedProgrammeName and _levelOfStudy and request.method == 'POST':
             # save edits
             sql = "UPDATE tbl_alumni SET name=%s, identificationCard=%s, studentId=%s, personalEmail=%s, studentHandphone=%s, studentTelephoneNumber=%s, graduatingCampus=%s, yearOfGraduation=%s, graduatingProgramme=%s, graduatedProgrammeName=%s, levelOfStudy=%s WHERE alumniId=%s"
-            data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone, _studentTelephoneNumber, _graduatingCampus, _yearOfGraduation, _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy,id)
+            data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone, _studentTelephoneNumber, _graduatingCampus, _yearOfGraduation, _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy, alumniId)
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sql, data)

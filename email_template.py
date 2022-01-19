@@ -1,4 +1,4 @@
-def OTPemail(otp):
+def emailOTP(otp):
     html = '<div style="font-family: Helvetica,Arial,sans-serif;width:60%;overflow:auto;line-height:2">' \
            '<div style="margin:50px auto;width:70%;padding:20px 0">' \
            '<div style="border-bottom:1px solid #eee">' \

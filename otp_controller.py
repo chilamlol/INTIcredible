@@ -6,16 +6,16 @@ from flask import request
 from flask_mail import Message
 from random import randint
 from mail_config import mail
-from emailTemplate import *
+from email_template import *
 
 
 # sendOTP
-@app.route('/OTPservice/send/<string:email>')
+@app.route('/OTPService/send/<string:email>')
 def sendOTP(email):
     try:
         otp = randint(000000, 999999)
         msg = Message('OTP', recipients=email.split())
-        msg.html = OTPemail(otp)
+        msg.html = emailOTP(otp)
         mail.send(msg)
 
         #write to table
@@ -35,7 +35,7 @@ def sendOTP(email):
         conn.close()
 
 
-@app.route('/OTPservice/verify/<string:email>',methods=['POST'])
+@app.route('/OTPService/verify/<string:email>',methods=['POST'])
 def verifyOTP(email):
     conn = None
     cursor = None

@@ -17,7 +17,7 @@ def md5Hash(s):
 
 
 # login status (1 = invalid credential, 2 = login successful)
-@app.route('/login',methods=['POST'])
+@app.route('/login', methods=['POST'])
 def verifyUser():
     try:
         _json = request.json
@@ -34,10 +34,10 @@ def verifyUser():
             row = cursor.fetchone()
             if row:
                 # If password validate successful
-                    if row[2] == _password:
-                        return jsonify(loginStatus=2,userID=row[0],activationStatus=row[4])  # Login Successful
-                    else:
-                        return jsonify(loginStatus=1,userID=0,activationStatus=0)  # Invalid credential
+                if row[2] == _password:
+                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4])  # Login Successful
+                else:
+                    return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
             else:
                 sql = "SELECT * FROM tbl_alumni WHERE studentId=%s"
                 data = _username
@@ -46,11 +46,11 @@ def verifyUser():
                 cursor.execute(sql, data)
                 row1 = cursor.fetchone()
                 if row1:
-                    passwordraw = row1[7]+row1[2]
-                    passwordhash = md5Hash(passwordraw)
-                    if passwordhash == _password:
-                        sql = "Insert tbl_user (username, password, alumniId, activationStatus) values (%s,%s,%s,%s)"
-                        data = (row1[3],_password,row1[0],0)
+                    rawPassword = row1[7] + row1[2]
+                    hashedPassword = md5Hash(rawPassword)
+                    if hashedPassword == _password:
+                        sql = "INSERT tbl_user (username, password, alumniId, activationStatus) values (%s,%s,%s,%s)"
+                        data = (row1[3], _password, row1[0], 0)
                         conn = mysql.connect()
                         cursor = conn.cursor()
                         cursor.execute(sql, data)
@@ -63,14 +63,14 @@ def verifyUser():
                         row3 = cursor.fetchone()
 
                         if row3:
-                            return jsonify(loginStatus=2,userID=row3[0],activationStatus=row3[4])
+                            return jsonify(loginStatus=2, userID=row3[0], activationStatus=row3[4])
                         else:
-                            return jsonify(loginStatus=1,userID=0,activationStatus=0)
+                            return jsonify(loginStatus=1, userID=0, activationStatus=0)
                     else:
-                        return jsonify(loginStatus=1,userID=0,activationStatus=0)# Invalid credential
+                        return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
 
                 else:
-                    return jsonify(loginStatus=1,userID=0,activationStatus=0)  # Invalid credential
+                    return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
         else:
             return not_found()
     except Exception as e:
@@ -79,8 +79,9 @@ def verifyUser():
         cursor.close()
         conn.close()
 
-#resetpassword
-@app.route('/account/resetpassword',methods=['POST'])
+
+# reset user password
+@app.route('/account/reset-password', methods=['POST'])
 def resetPassword():
     try:
         _json = request.json
@@ -95,28 +96,28 @@ def resetPassword():
             cursor.execute(sql, data)
             row = cursor.fetchone()
             if row:
-                if row[4]==0:
+                if row[4] == 0:
                     sql = "UPDATE tbl_user set password=%s, activationStatus=10 where userID=%s"
-                    data = (_password,_userID)
+                    data = (_password, _userID)
                     conn = mysql.connect()
                     cursor = conn.cursor()
                     cursor.execute(sql, data)
                     conn.commit()
-                    resp = jsonify(message="Password Update Successfully!",status="200")
+                    resp = jsonify(message="Password Update Successfully!", status="200")
                     resp.status_code = 200
                     return resp
                 else:
                     sql = "UPDATE tbl_user set password=%s where userID=%s"
-                    data = (_password,_userID)
+                    data = (_password, _userID)
                     conn = mysql.connect()
                     cursor = conn.cursor()
                     cursor.execute(sql, data)
                     conn.commit()
-                    resp = jsonify(message="Password Reset Successfully!",status="200")
+                    resp = jsonify(message="Password Reset Successfully!", status="200")
                     resp.status_code = 200
                     return resp
             else:
-                resp = jsonify(message="Unable to find user!",status="201")
+                resp = jsonify(message="Unable to find user!", status="201")
                 resp.status_code = 200
                 return resp
         else:
@@ -127,8 +128,9 @@ def resetPassword():
         cursor.close()
         conn.close()
 
-#update profile
-@app.route('/account/updateprofile',methods=['POST'])
+
+# update profile
+@app.route('/account/update-profile', methods=['POST'])
 def updateProfile():
     try:
         _json = request.json
@@ -147,7 +149,7 @@ def updateProfile():
 
             if row:
                 sql = "UPDATE tbl_alumni set personalEmail=%s, studentHandphone=%s, studentTelephoneNumber=%s where alumniId=%s"
-                data = (_email,_handphone,_telephone,row[3])
+                data = (_email, _handphone, _telephone, row[3])
                 conn = mysql.connect()
                 cursor = conn.cursor()
                 cursor.execute(sql, data)
@@ -160,11 +162,11 @@ def updateProfile():
                 cursor.execute(sql, data)
                 conn.commit()
 
-                resp = jsonify(message="Update Successful!",status="200")
+                resp = jsonify(message="Update Successful!", status="200")
                 resp.status_code = 200
                 return resp
             else:
-                resp = jsonify(message="Unable to find user!",status="201")
+                resp = jsonify(message="Unable to find user!", status="201")
                 resp.status_code = 200
                 return resp
         else:
@@ -175,22 +177,6 @@ def updateProfile():
         cursor.close()
         conn.close()
 
-
-# hashedPassword for test user 7c6f0e61f4333bffddbeb560b009c752
-@app.route('/account/create')
-def createUser():
-    conn = None
-    cursor = None
-    try:
-        _json = request.json
-        _password = _json['password']
-        # if _password and request.method == 'POST':
-
-    except Exception as e:
-        print(e)
-    finally:
-        cursor.close()
-        conn.close()
 
 def not_found(error=None):
     message = {
