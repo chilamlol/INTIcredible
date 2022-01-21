@@ -4,13 +4,12 @@ This is the backend API for all the service in INTIcredible app and admin web po
 
 **Prerequisite**
 
-Python 3.7
-Flask
-PyMySQL
-Flask-MySQL
-Flask-Mail
-Hashlib
-
+* Python 3.7 
+* Flask
+  * Flask-MySQL
+  * Flask-Mail
+* PyMySQL
+* Hashlib
 
 # Confidential
  
