@@ -13,7 +13,7 @@ def add_faq_category():
     try:
         _json = request.json
         _name = _json['name']
-        _recordStatus = _json['recordStation']
+        _recordStatus = _json['recordStatus']
         # validate the received values
         if _name and _recordStatus and request.method == 'POST':
             # save edits
