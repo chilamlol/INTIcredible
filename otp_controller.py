@@ -25,7 +25,7 @@ def sendOTP(email):
         cursor = conn.cursor()
         cursor.execute(sql, data)
         conn.commit()
-        resp = jsonify(message="OTP sent and stored",status="200")
+        resp = jsonify(message="OTP sent and stored", status="200")
         resp.status_code = 200
         return resp
     except Exception as e:
@@ -35,14 +35,14 @@ def sendOTP(email):
         conn.close()
 
 
-@app.route('/OTPService/verify/<string:email>',methods=['POST'])
+@app.route('/OTPService/verify/<string:email>', methods=['POST'])
 def verifyOTP(email):
     conn = None
     cursor = None
     try:
         _json = request.json
         _otp = _json['otp']
-        _userID = _json['userID']
+        _userId = _json['userId']
         if _otp:
             sql = "SELECT otp FROM tbl_otp WHERE personalEmail = %s ORDER BY otpId DESC LIMIT 1"
             conn = mysql.connect()
@@ -50,8 +50,8 @@ def verifyOTP(email):
             cursor.execute(sql, email)
             row = cursor.fetchone()
             if row[0] == _otp:
-                sql = "UPDATE tbl_user set activationStatus=30 where userID=%s"
-                data = _userID
+                sql = "UPDATE tbl_user set activationStatus=30 where userId=%s"
+                data = _userId
                 conn = mysql.connect()
                 cursor = conn.cursor()
                 cursor.execute(sql, data)
