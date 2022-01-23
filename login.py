@@ -118,7 +118,7 @@ def resetPassword():
                     return resp
             else:
                 resp = jsonify(message="Unable to find user!", status="201")
-                resp.status_code = 200
+                resp.status_code = 201
                 return resp
         else:
             return not_found()
@@ -167,7 +167,7 @@ def updateProfile():
                 return resp
             else:
                 resp = jsonify(message="Unable to find user!", status="201")
-                resp.status_code = 200
+                resp.status_code = 201
                 return resp
         else:
             return not_found()
