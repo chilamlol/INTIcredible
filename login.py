@@ -3,17 +3,24 @@ import pymysql
 from db_config import mysql
 from flask import jsonify
 from flask import request
-from flask_jwt import JWT, jwt_required, current_identity
+import uuid
 import hashlib
 
 
+#Only extracting integer from string
 def extractOnlyInteger(s):
     num = ''.join(x for x in s if x.isdigit())
     return num
 
 
+#MD5 hashing
 def md5Hash(s):
     return hashlib.md5(s.encode()).hexdigest()
+
+
+#Generate UUID for user
+def generateUUID():
+    return uuid.uuid4()
 
 
 # login status (1 = invalid credential, 2 = login successful)
@@ -49,8 +56,8 @@ def verifyUser():
                     rawPassword = row1[7] + row1[2]
                     hashedPassword = md5Hash(rawPassword)
                     if hashedPassword == _password:
-                        sql = "INSERT tbl_user (username, password, alumniId, activationStatus) values (%s,%s,%s,%s)"
-                        data = (row1[3], _password, row1[0], 0)
+                        sql = "INSERT INTO tbl_user VALUES (%s,%s,%s,%s,%s)"
+                        data = (generateUUID(), row1[3], _password, row1[0], 0)
                         conn = mysql.connect()
                         cursor = conn.cursor()
                         cursor.execute(sql, data)
