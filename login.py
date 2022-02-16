@@ -42,9 +42,9 @@ def verifyUser():
             if row:
                 # If password validate successful
                 if row[2] == _password:
-                    return jsonify(loginStatus=2, userId=row[0], activationStatus=row[4])  # Login Successful
+                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4])  # Login Successful
                 else:
-                    return jsonify(loginStatus=1, userId=0, activationStatus=0)  # Invalid credential
+                    return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
             else:
                 sql = "SELECT * FROM tbl_alumni WHERE studentId=%s"
                 data = _username
@@ -56,8 +56,8 @@ def verifyUser():
                     rawPassword = row1[7] + row1[2]
                     hashedPassword = md5Hash(rawPassword)
                     if hashedPassword == _password:
-                        sql = "INSERT INTO tbl_user VALUES (%s,%s,%s,%s,%s)"
-                        data = (generateUUID(), row1[3], _password, row1[0], 0)
+                        sql = "INSERT INTO tbl_user (username, password, alumniId, activationStatus, GUID) VALUES (%s, %s, %s, %s, %s)"
+                        data = (row1[3], _password, row1[0], 0, generateUUID())
                         conn = mysql.connect()
                         cursor = conn.cursor()
                         cursor.execute(sql, data)
@@ -70,14 +70,14 @@ def verifyUser():
                         row3 = cursor.fetchone()
 
                         if row3:
-                            return jsonify(loginStatus=2, userId=row3[0], activationStatus=row3[4])
+                            return jsonify(loginStatus=2, userID=row3[0], activationStatus=row3[4])
                         else:
-                            return jsonify(loginStatus=1, userId=0, activationStatus=0)
+                            return jsonify(loginStatus=1, userID=0, activationStatus=0)
                     else:
-                        return jsonify(loginStatus=1, userId=0, activationStatus=0)  # Invalid credential
+                        return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
 
                 else:
-                    return jsonify(loginStatus=1, userId=0, activationStatus=0)  # Invalid credential
+                    return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
         else:
             return not_found()
     except Exception as e:
