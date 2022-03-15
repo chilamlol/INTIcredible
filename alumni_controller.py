@@ -102,7 +102,6 @@ def update_alumni(alumniId):
             cursor.execute(sql, data)
             conn.commit()
             resp = jsonify(message='Alumni updated successfully!',status='200')
-            resp.status_code = 200
             return resp
         else:
             return not_found()
