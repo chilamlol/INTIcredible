@@ -51,7 +51,7 @@ def show_all_banner():
 
 
 # list specific banner
-@app.route('/banner/<int:bannerId>')
+@app.route('/event/<int:bannerId>')
 def show_banner(bannerId):
     try:
         conn = mysql.connect()
