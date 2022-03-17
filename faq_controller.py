@@ -105,7 +105,7 @@ def delete_faq(faqId):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_faq_category WHERE faqId=%s", faqId)
+        cursor.execute("DELETE FROM tbl_faq WHERE faqId=%s", faqId)
         conn.commit()
         resp = jsonify('FAQ deleted successfully!')
         resp.status_code = 200
