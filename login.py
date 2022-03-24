@@ -42,7 +42,7 @@ def verifyUser():
             if row:
                 # If password validate successful
                 if row[2] == _password:
-                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4])  # Login Successful
+                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4], username=_username)  # Login Successful
                 else:
                     return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
             else:
@@ -70,7 +70,7 @@ def verifyUser():
                         row3 = cursor.fetchone()
 
                         if row3:
-                            return jsonify(loginStatus=2, userID=row3[0], activationStatus=row3[4])
+                            return jsonify(loginStatus=2, userID=row3[0], activationStatus=row3[4], username=_username)
                         else:
                             return jsonify(loginStatus=1, userID=0, activationStatus=0)
                     else:
@@ -184,12 +184,3 @@ def updateProfile():
         cursor.close()
         conn.close()
 
-
-def not_found(error=None):
-    message = {
-        'status': 404,
-        'message': 'Not Found: ' + request.url,
-    }
-    resp = jsonify(message)
-    resp.status_code = 404
-    return resp
