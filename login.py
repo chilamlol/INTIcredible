@@ -1,10 +1,10 @@
 from app import app
 import pymysql
 from db_config import mysql
-from flask import jsonify
-from flask import request
+from flask import jsonify, request
 import uuid
 import hashlib
+from db_execution import *
 
 
 #Only extracting integer from string
@@ -33,16 +33,19 @@ def verifyUser():
         # validate the received values
         if _username and _password:
 
-            sql = "SELECT * FROM tbl_user WHERE username=%s"
+            sql = "SELECT tu.*, ta.name FROM tbl_user tu LEFT JOIN tbl_alumni ta ON tu.username = ta.studentId WHERE tu.username=%s"
             data = _username
             conn = mysql.connect()
             cursor = conn.cursor()
             cursor.execute(sql, data)
             row = cursor.fetchone()
+
+            alumniName = row['name']
+
             if row:
                 # If password validate successful
                 if row[2] == _password:
-                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4], username=_username)  # Login Successful
+                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4], name=alumniName)  # Login Successful
                 else:
                     return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
             else:
@@ -70,7 +73,7 @@ def verifyUser():
                         row3 = cursor.fetchone()
 
                         if row3:
-                            return jsonify(loginStatus=2, userID=row3[0], activationStatus=row3[4], username=_username)
+                            return jsonify(loginStatus=2, userID=row3[0], activationStatus=row3[4], name=alumniName)
                         else:
                             return jsonify(loginStatus=1, userID=0, activationStatus=0)
                     else:
