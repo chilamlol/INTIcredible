@@ -10,13 +10,12 @@ app.config['MYSQL_DATABASE_DB'] = 'chilamlol$alumni'
 app.config['MYSQL_DATABASE_HOST'] = 'chilamlol.mysql.pythonanywhere-services.com'
 
 """
-MySQL configurations for localhost
+#MySQL configurations for localhost
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = ''
 app.config['MYSQL_DATABASE_DB'] = 'alumni'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 """
-
 
 
 mysql.init_app(app)

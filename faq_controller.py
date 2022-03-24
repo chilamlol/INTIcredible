@@ -1,62 +1,114 @@
 from app import app
-import pymysql
-from db_config import mysql
-from flask import jsonify
-from flask import request
+from flask import jsonify, request
+from db_execution import *
+from error_handler import *
+import json
 
 
 # add FAQ
 @app.route('/faq/add', methods=['POST'])
 def add_faq():
-    conn = None
-    cursor = None
     try:
         _json = request.json
+
+        # return error if json body is empty
+        if not _json:
+            return bad_request()
+
+        # return error if json parameter incomplete
+        if 'question' and 'answer' and 'recordStatus' and 'faqCatId' not in _json:
+            return unprocessable_entity()
+
         _question = _json['question']
         _answer = _json['answer']
         _recordStatus = _json['recordStatus']
         _faqCatId = _json['faqCatId']
+
         # validate the received values
         if _question and _answer and _recordStatus and _faqCatId and request.method == 'POST':
+
             # save edits
             sql = "INSERT INTO tbl_faq(question, answer, recordStatus, faqCatId) VALUES(%s, %s, %s, %s)"
+
             data = (_question, _answer, _recordStatus, _faqCatId)
-            conn = mysql.connect()
-            cursor = conn.cursor()
-            cursor.execute(sql, data)
-            conn.commit()
-            resp = jsonify('FAQ added successfully!')
-            resp.status_code = 200
-            return resp
-        else:
-            return not_found()
+
+            if createRecord(sql, data) > 0:
+                resp = jsonify('FAQ added successfully!')
+                resp.status_code = 200
+                return resp
+
+        return not_found()
+
     except Exception as e:
         print(e)
+        return internal_server_error(e)
 
 
 # list all FAQ
 @app.route('/faq')
 def show_all_faq():
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM tbl_faq")
-        rows = cursor.fetchall()
+        sql = "SELECT * FROM tbl_faq"
+        rows = readAllRecord(sql)
+        print(rows)
         resp = jsonify(rows)
         resp.status_code = 200
         return resp
     except Exception as e:
         print(e)
+        return internal_server_error(e)
+
+
+# list all FAQ nested
+@app.route('/faq/nested')
+def show_all_faq_nested():
+    try:
+
+        # Requires MySQL 5.7 and above
+        sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('faqCatId', tfc.faqCatId, 'name', tfc.name, 'recordStatus',tfc.recordStatus, 'faq', tf.faqList))" \
+              " FROM " \
+              " tbl_faq_category tfc" \
+              " LEFT JOIN (" \
+              " SELECT faqCatId," \
+              " JSON_ARRAYAGG(JSON_OBJECT('faqId', faqId, 'question', question, 'answer', answer, 'recordStatus', recordStatus)) faqList " \
+              " FROM tbl_faq" \
+              " GROUP BY faqCatId" \
+              " ) tf ON tf.faqCatId = tfc.faqCatId WHERE tf.faqList IS NOT NULL"
+
+        """
+        # Doesn't require MySQL version
+        sql = ''' SELECT CONCAT('[', GROUP_CONCAT(CONCAT('{','"faqCatId":"', tfc.faqCatId, '", "name":"',tfc.name,'", "recordStatus":"', tfc.recordStatus, '", "faq":[', IFNULL((SELECT GROUP_CONCAT(CONCAT('{"faqId":"', tf.faqId, '", "question":"', tf.question, '", "answer":"', tf.answer,'"}') SEPARATOR ', ') FROM tbl_faq tf WHERE tf.faqCatId = tfc.faqCatId),''),']','}') SEPARATOR ', '), ']') FROM tbl_faq_category tfc'''
+        """
+
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        row = cursor.fetchone()
+
+        # Convert list to string to remove unwanted characters
+        res = str(row)[2:-3].replace("\\", "")
+
+        # Convert back to JSON
+        resp = jsonify(json.loads(res))
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
 
 
 # list specific FAQ
 @app.route('/faq/<int:faqId>')
 def show_faq(faqId):
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM tbl_faq WHERE faqId=%s", faqId)
-        row = cursor.fetchone()
+
+        sql = "SELECT * FROM tbl_faq WHERE faqId=%s"
+
+        row = readOneRecord(sql, faqId)
+
+        if not row:
+            return not_found()
+
         resp = jsonify(row)
         resp.status_code = 200
         return resp
@@ -68,61 +120,55 @@ def show_faq(faqId):
 
 
 # Update FAQ
-@app.route('/faq/update/<int:faqId>', methods=['POST'])
+@app.route('/faq/update/<int:faqId>', methods=['PUT'])
 def update_faq(faqId):
-    conn = None
-    cursor = None
     try:
         _json = request.json
+
+        # return error if json body is empty
+        if not _json:
+            return bad_request()
+
+        # return error if json parameter incomplete
+        if 'question' and 'answer' and 'recordStatus' and 'faqCatId' not in _json:
+            return unprocessable_entity()
+
         _question = _json['question']
         _answer = _json['answer']
         _recordStatus = _json['recordStatus']
         _faqCatId = _json['faqCatId']
+
         # validate the received values
-        if _question and _answer and _recordStatus and _faqCatId and request.method == 'POST':
+        if _question and _answer and _recordStatus and _faqCatId and request.method == 'PUT':
+
             # save edited
             sql = "UPDATE tbl_faq SET question=%s, answer=%s, recordStatus=%s, faqCatId=%s WHERE faqId=%s"
+
             data = (_question, _answer, _recordStatus, _faqCatId, faqId)
-            conn = mysql.connect()
-            cursor = conn.cursor()
-            cursor.execute(sql, data)
-            conn.commit()
-            resp = jsonify('FAQ updated successfully!')
-            resp.status_code = 200
-            return resp
-        else:
-            return not_found()
+
+            if updateRecord(sql, data) > 0:
+                resp = jsonify(message='FAQ updated successfully')
+                resp.status_code = 200
+                return resp
+
+        return not_found()
+
     except Exception as e:
         print(e)
-    finally:
-        cursor.close()
-        conn.close()
+        return internal_server_error(e)
 
 
 # Delete FAQ
-@app.route('/faq/delete/<int:faqId>')
+@app.route('/faq/delete/<int:faqId>', methods=['DELETE'])
 def delete_faq(faqId):
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_faq WHERE faqId=%s", faqId)
-        conn.commit()
-        resp = jsonify('FAQ deleted successfully!')
-        resp.status_code = 200
-        return resp
+        sql = "DELETE FROM tbl_faq WHERE faqId=%s"
+        if deleteRecord(sql, alumniId) > 0:
+            resp = jsonify(message='FAQ deleted successfully')
+            resp.status_code = 200
+            return resp
+
+        return not_found()
     except Exception as e:
         print(e)
-    finally:
-        cursor.close()
-        conn.close()
-
-
-@app.errorhandler(404)
-def not_found(error=None):
-    message = {
-        'status': 404,
-        'message': 'Not Found: ' + request.url,
-    }
-    resp = jsonify(message)
-    resp.status_code = 404
-    return resp
+        return internal_server_error(e)

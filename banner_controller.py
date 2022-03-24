@@ -1,130 +1,133 @@
 from app import app
-import pymysql
-from db_config import mysql
-from flask import jsonify
-from flask import request
+from flask import jsonify, request
+from db_execution import *
+from error_handler import *
 
 
 # add banner
 @app.route('/banner/add', methods=['POST'])
 def add_banner():
-    conn = None
-    cursor = None
     try:
         _json = request.json
+
+        # return error if json body is empty
+        if not _json:
+            return bad_request()
+
+        # return error if json parameter incomplete
+        if 'bannerImage' and 'startDate' and 'endDate' \
+                and 'sequence' and 'recordStatus' not in _json:
+            return unprocessable_entity()
+
         _bannerImage = _json['bannerImage']
         _startDate = _json['startDate']
         _endDate = _json['endDate']
         _sequence = _json['sequence']
         _recordStatus = _json['recordStatus']
+
         # validate the received values
-        if _bannerImage and _startDate and _endDate and _sequence and _recordStatus and request.method == 'POST':
+        if _bannerImage and _startDate and _endDate \
+                and _sequence and _recordStatus and request.method == 'POST':
             # save edits
             sql = "INSERT INTO tbl_banner(bannerImage, startDate, endDate, sequence, recordStatus) VALUES(%s, %s, %s, %s, %s)"
             data = (_bannerImage, _startDate, _endDate, _sequence, _recordStatus)
-            conn = mysql.connect()
-            cursor = conn.cursor()
-            cursor.execute(sql, data)
-            conn.commit()
-            resp = jsonify('Banner added successfully!')
-            resp.status_code = 200
-            return resp
-        else:
-            return not_found()
+
+            if createRecord(sql, data) > 0:
+                resp = jsonify(message='Banner added successfully')
+                resp.status_code = 201
+                return resp
+
+        return bad_request()
+
     except Exception as e:
         print(e)
+        return internal_server_error(e)
 
 
 # list all banners
 @app.route('/banner')
 def show_all_banner():
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM tbl_banner")
-        rows = cursor.fetchall()
+        sql = "SELECT * FROM tbl_banner"
+        rows = readAllRecord(sql)
         resp = jsonify(rows)
         resp.status_code = 200
         return resp
     except Exception as e:
         print(e)
+        return internal_server_error(e)
 
 
 # list specific banner
 @app.route('/banner/<int:bannerId>')
 def show_banner(bannerId):
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute("SELECT * FROM tbl_banner WHERE bannerId=%s", bannerId)
-        row = cursor.fetchone()
+        sql = "SELECT * FROM tbl_banner WHERE bannerId=%s"
+        row = readOneRecord(sql, bannerId)
+        if not row:
+            return not_found()
+
         resp = jsonify(row)
         resp.status_code = 200
         return resp
     except Exception as e:
         print(e)
-    finally:
-        cursor.close()
-        conn.close()
+        return internal_server_error(e)
 
 
 # Update Banner
-@app.route('/banner/update/<int:bannerId>', methods=['POST'])
+@app.route('/banner/update/<int:bannerId>', methods=['PUT'])
 def update_banner(bannerId):
-    conn = None
-    cursor = None
     try:
         _json = request.json
+
+        # return error if json body is empty
+        if not _json:
+            return bad_request()
+
+        # return error if json parameter incomplete
+        if 'bannerImage' and 'startDate' and 'endDate' \
+                and 'sequence' and 'recordStatus' not in _json:
+            return unprocessable_entity()
+
         _bannerImage = _json['bannerImage']
         _startDate = _json['startDate']
         _endDate = _json['endDate']
         _sequence = _json['sequence']
         _recordStatus = _json['recordStatus']
+
         # validate the received values
-        if _bannerImage and _startDate and _endDate and _sequence and _recordStatus and request.method == 'POST':
+        if _bannerImage and _startDate and _endDate \
+                and _sequence and _recordStatus and request.method == 'PUT':
             # save edits
             sql = "UPDATE tbl_banner SET bannerImage=%s, startDate=%s, endDate=%s, sequence=%s, recordStatus=%s WHERE bannerId=%s"
             data = (_bannerImage, _startDate, _endDate, _sequence, _recordStatus, bannerId)
-            conn = mysql.connect()
-            cursor = conn.cursor()
-            cursor.execute(sql, data)
-            conn.commit()
-            resp = jsonify('Banner updated successfully!')
-            resp.status_code = 200
-            return resp
-        else:
-            return not_found()
+
+            if updateRecord(sql, data) > 0:
+                resp = jsonify(message='Banner updated successfully')
+                resp.status_code = 200
+                return resp
+
+        return not_found()
+
     except Exception as e:
         print(e)
-    finally:
-        cursor.close()
-        conn.close()
+        return internal_server_error(e)
 
 
 # Delete Banner
-@app.route('/banner/delete/<int:bannerId>')
+@app.route('/banner/delete/<int:bannerId>', methods=['DELETE'])
 def delete_banner(bannerId):
     try:
-        conn = mysql.connect()
-        cursor = conn.cursor()
-        cursor.execute("DELETE FROM tbl_banner WHERE bannerId=%s", bannerId)
-        conn.commit()
-        resp = jsonify('Banner deleted successfully!')
-        resp.status_code = 200
-        return resp
+
+        sql = "DELETE FROM tbl_banner WHERE bannerId=%s"
+
+        if deleteRecord(sql, bannerId) > 0:
+            resp = jsonify(message='Banner deleted successfully')
+            resp.status_code = 200
+            return resp
+
+        return not_found()
     except Exception as e:
         print(e)
-    finally:
-        cursor.close()
-        conn.close()
-
-
-@app.errorhandler(404)
-def not_found(error=None):
-    message = {
-        'status': 404,
-        'message': 'Not Found: ' + request.url,
-    }
-    resp = jsonify(message)
-    resp.status_code = 404
-    return resp
+        return internal_server_error(e)

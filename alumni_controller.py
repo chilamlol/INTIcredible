@@ -10,11 +10,11 @@ def add_alumni():
     try:
         _json = request.json
 
-        # return if json body is empty
+        # return error if json body is empty
         if not _json:
             return bad_request()
 
-        # return if json parameter incomplete
+        # return error if json parameter incomplete
         if 'name' and 'identificationCard' and 'studentId' and 'personalEmail' and 'studentHandphone' \
                 and 'studentTelephoneNumber' and 'graduatingCampus' and 'yearOfGraduation' and 'graduatingProgramme' \
                 and 'graduatedProgrammeName' and 'levelOfStudy' not in _json:
@@ -33,7 +33,9 @@ def add_alumni():
         _levelOfStudy = _json['levelOfStudy']
 
         # validate the received values
-        if _name and _identificationCard and _studentId and _personalEmail and _graduatingCampus and _yearOfGraduation and _graduatingProgramme and _graduatedProgrammeName and _levelOfStudy and request.method == 'POST':
+        if _name and _identificationCard and _studentId and _personalEmail \
+                and _graduatingCampus and _yearOfGraduation and _graduatingProgramme \
+                and _graduatedProgrammeName and _levelOfStudy and request.method == 'POST':
 
             # save edits
             sql = "INSERT INTO tbl_alumni(name, identificationCard, studentId, personalEmail, " \
@@ -94,11 +96,11 @@ def update_alumni(alumniId):
     try:
         _json = request.json
 
-        # return if json body is empty
+        # return error if json body is empty
         if not _json:
             return bad_request()
 
-        # return if json parameter incomplete
+        # return error if json parameter incomplete
         if 'name' and 'identificationCard' and 'studentId' and 'personalEmail' and 'studentHandphone' \
                 and 'studentTelephoneNumber' and 'graduatingCampus' and 'yearOfGraduation' and 'graduatingProgramme' \
                 and 'graduatedProgrammeName' and 'levelOfStudy' not in _json:
