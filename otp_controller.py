@@ -30,13 +30,11 @@ def sendOTP(email):
         sql = "INSERT INTO tbl_otp (personalEmail, otp, date) Values (%s, %s, CURRENT_DATE())"
         data = (email, otp)
 
-        if createRecord(sql, data):
+        if createRecord(sql, data) > 0:
             resp = jsonify(message="OTP sent and stored")
             resp.status_code = 200
-        else:
-            resp = jsonify(message="Unable to store")
-            resp.status_code = 400
-        return resp
+            return resp
+        return bad_request()
 
     except Exception as e:
         print(e)
@@ -61,14 +59,13 @@ def verifyOTP(email):
         if _otp and request.method == 'POST':
             sql = "SELECT otp FROM tbl_otp WHERE personalEmail = %s ORDER BY otpId DESC LIMIT 1"
 
-            result = readRecord(sql, email)
+            result = readOneRecord(sql, email)
 
             # Invalid personal email
             if not result:
                 return not_found()
-
             # User input OTP match with OTP sent, update status
-            if result[0] == _otp:
+            if result['otp'] == _otp:
                 resp = jsonify(otpVerify=1, message="Successfully verified")
                 resp.status_code = 200
                 return resp
