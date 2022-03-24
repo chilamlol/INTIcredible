@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/account_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alumni_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/alumni_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/banner_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_execution.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_execution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/error_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/event_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faq_category_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/faq_category_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faq_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/faq_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/route.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +126,8 @@
       <workItem from="1643114644674" duration="3090000" />
       <workItem from="1647508285674" duration="2101000" />
       <workItem from="1648108788869" duration="11047000" />
-      <workItem from="1648133199070" duration="12564000" />
+      <workItem from="1648133199070" duration="12689000" />
+      <workItem from="1648146741703" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -179,7 +171,28 @@
       <option name="project" value="LOCAL" />
       <updated>1643112964554</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refactored the code and bugfix and error handling added">
+      <created>1648146346087</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1648146346087</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update readme.md and merge local with remote">
+      <created>1648146384095</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1648146384095</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added username in response body for login, added new controller for account activation">
+      <created>1648146415136</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1648146415136</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,6 +217,9 @@
     <MESSAGE value="Added import to route for API call" />
     <MESSAGE value="Added secret key for encryption" />
     <MESSAGE value="Added UUID generate when user account created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added UUID generate when user account created" />
+    <MESSAGE value="Refactored the code and bugfix and error handling added" />
+    <MESSAGE value="Update readme.md and merge local with remote" />
+    <MESSAGE value="added username in response body for login, added new controller for account activation" />
+    <option name="LAST_COMMIT_MESSAGE" value="added username in response body for login, added new controller for account activation" />
   </component>
 </project>

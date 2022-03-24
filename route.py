@@ -5,6 +5,7 @@ from otp_controller import *
 from faq_controller import *
 from faq_category_controller import *
 from banner_controller import *
+from account_contoller import *
 
 
 @app.route("/")
