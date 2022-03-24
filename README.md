@@ -10,6 +10,7 @@ This is the backend API for all the service in INTIcredible app and admin web po
   * Flask-Mail
 * PyMySQL
 * Hashlib
+* MySQL 5.7 and above
 
 API key is using JWT hashed GUID.
 

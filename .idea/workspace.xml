@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/account_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alumni_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/alumni_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/banner_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/banner_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_execution.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_execution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/error_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/error_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/event_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/faq_category_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/faq_category_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/faq_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/faq_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/login.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="20amaQemrZ1zUiaLvRb3isaWBP8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Desktop\flaskProject" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="flaskProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="flaskProject" type="PythonConfigurationType" factoryName="Python">
+      <module name="flaskProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="" />
+      <created>1636291135730</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636291135730</updated>
+      <workItem from="1636291137070" duration="4159000" />
+      <workItem from="1636614406301" duration="3156000" />
+      <workItem from="1637396522997" duration="5641000" />
+      <workItem from="1637405593112" duration="210000" />
+      <workItem from="1637582432831" duration="49000" />
+      <workItem from="1639216891970" duration="14932000" />
+      <workItem from="1639318893363" duration="152000" />
+      <workItem from="1639367429509" duration="208000" />
+      <workItem from="1639489883442" duration="3813000" />
+      <workItem from="1639493783565" duration="60000" />
+      <workItem from="1639493908119" duration="40000" />
+      <workItem from="1639665398318" duration="3731000" />
+      <workItem from="1642327586847" duration="593000" />
+      <workItem from="1642346460637" duration="695000" />
+      <workItem from="1642580257662" duration="115000" />
+      <workItem from="1642580434085" duration="2296000" />
+      <workItem from="1642583065836" duration="8251000" />
+      <workItem from="1642591717844" duration="833000" />
+      <workItem from="1642610142755" duration="819000" />
+      <workItem from="1642923702367" duration="2117000" />
+      <workItem from="1643112828402" duration="625000" />
+      <workItem from="1643114216276" duration="351000" />
+      <workItem from="1643114644674" duration="3090000" />
+      <workItem from="1647508285674" duration="2101000" />
+      <workItem from="1648108788869" duration="11047000" />
+      <workItem from="1648133199070" duration="12564000" />
+    </task>
+    <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
+      <created>1642588064353</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1642588064353</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added new API controller for FAQ and FAQ category.">
+      <created>1642588112022</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1642588112037</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed naming conversion">
+      <created>1642588173436</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1642588173436</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added import to route for API call">
+      <created>1642589736342</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1642589736342</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added secret key for encryption">
+      <created>1643112924184</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1643112924184</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added UUID generate when user account created">
+      <created>1643112964554</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1643112964554</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changed naming conversion and refactored some code" />
+    <MESSAGE value="added new API controller for FAQ and FAQ category." />
+    <MESSAGE value="Changed naming conversion" />
+    <MESSAGE value="Added import to route for API call" />
+    <MESSAGE value="Added secret key for encryption" />
+    <MESSAGE value="Added UUID generate when user account created" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added UUID generate when user account created" />
+  </component>
+</project>
