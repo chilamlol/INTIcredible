@@ -48,7 +48,7 @@ def add_alumni():
                 resp.status_code = 201
                 return resp
 
-            return bad_request()
+        return bad_request()
 
     except Exception as e:
         print(e)
@@ -115,6 +115,7 @@ def update_alumni(alumniId):
         _graduatingProgramme = _json['graduatingProgramme']
         _graduatedProgrammeName = _json['graduatedProgrammeName']
         _levelOfStudy = _json['levelOfStudy']
+
         # validate the received values
         if _name and _identificationCard and _studentId and _personalEmail \
                 and _graduatingCampus and _yearOfGraduation and _graduatingProgramme \
@@ -133,8 +134,9 @@ def update_alumni(alumniId):
                 resp = jsonify(message='Alumni updated successfully!')
                 resp.status_code = 200
                 return resp
-            else:
-                return not_found()
+
+        return not_found()
+
     except Exception as e:
         print(e)
         return internal_server_error(e)
@@ -150,8 +152,8 @@ def delete_alumni(alumniId):
             resp = jsonify(message='Alumni successfully deleted')
             resp.status_code = 200
             return resp
-        else:
-            return not_found()
+
+        return not_found()
     except Exception as e:
         print(e)
         return internal_server_error(e)
