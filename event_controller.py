@@ -3,6 +3,7 @@ from flask import jsonify, request
 from db_execution import *
 from error_handler import *
 from datetime import datetime
+import json
 
 
 def convertStringToDateTime(str):
@@ -54,7 +55,15 @@ def show_all_event():
     try:
         sql = "SELECT * FROM tbl_event"
         rows = readAllRecord(sql)
-        resp = jsonify(rows)
+
+        result = []
+
+        for row in rows:
+            row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
+            result.append(row)
+
+        resp = jsonify(result)
         resp.status_code = 200
         return resp
     except Exception as e:
@@ -68,10 +77,14 @@ def show_event(eventId):
     try:
         sql = "SELECT * FROM tbl_event WHERE eventId=%s"
 
-        row = readOneRecord(sql, alumniId)
+        row = readOneRecord(sql, eventId)
 
         if not row:
             return not_found()
+
+        # Convert date time format for output
+        row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+        row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
 
         resp = jsonify(row)
         resp.status_code = 200
