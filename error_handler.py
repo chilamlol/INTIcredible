@@ -25,7 +25,7 @@ def not_found(error=None):
 @app.errorhandler(500)
 def internal_server_error(error=None):
     message = {
-        'error': 'The server encountered an internal error or misconfiguration and was unable to complete your process: ' + request.url,
+        'error': 'Something went wrong. Please try again later: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 500
