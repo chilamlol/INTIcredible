@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 def convertStringToDateTime(str):
-    return datetime.strptime(str, '%d/%m/%Y')
+    return datetime.strptime(str, '%Y-%m-%d %H:%M:%S')
 
 
 # add events
