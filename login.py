@@ -40,9 +40,10 @@ def verifyUser():
             cursor.execute(sql, data)
             row = cursor.fetchone()
 
-            alumniName = row['name']
-
             if row:
+
+                alumniName = row[6]
+
                 # If password validate successful
                 if row[2] == _password:
                     return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4], name=alumniName)  # Login Successful

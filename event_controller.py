@@ -2,6 +2,11 @@ from app import app
 from flask import jsonify, request
 from db_execution import *
 from error_handler import *
+from datetime import datetime
+
+
+def convertStringToDateTime(str):
+    return datetime.strptime(str, '%d/%m/%Y')
 
 
 # add events
@@ -34,7 +39,11 @@ def add_event():
             # save edits
             sql = "INSERT INTO tbl_event(name, description, image, registerLink, startDate, endDate, status) VALUES(%s, %s, %s, %s, %s, %s, %s)"
 
-            data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status)
+            # Convert string to Date time
+            startDate = str(convertStringToDateTime(_startDate))
+            endDate = str(convertStringToDateTime(_endDate))
+
+            data = (_name, _description, _image, _registerLink, startDate, endDate, _status)
 
             if createRecord(sql, data) > 0:
                 resp = jsonify(message='Event added successfully!')

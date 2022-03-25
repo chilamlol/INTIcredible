@@ -33,10 +33,9 @@ def not_found(error=None):
 
 
 @app.errorhandler(500)
-def internal_server_error(error):
+def internal_server_error(error=None):
     message = {
-        'message': request.url + ' is currently unable to handle this request.',
-        'error': error
+        'message': request.url + ' is currently unable to handle this request.'
     }
     resp = jsonify(message)
     resp.status_code = 500
