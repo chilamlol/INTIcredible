@@ -5,7 +5,7 @@ from flask import request, jsonify
 @app.errorhandler(400)
 def bad_request(error=None):
     message = {
-        'message': 'Server couldn\'t process the request, please check your syntax: ' + request.url,
+        'message': 'Request body is empty or missing: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 400
