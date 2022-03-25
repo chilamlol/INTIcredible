@@ -10,15 +10,6 @@ def add_banner():
     try:
         _json = request.json
 
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'bannerImage' and 'startDate' and 'endDate' \
-                and 'sequence' and 'recordStatus' not in _json:
-            return unprocessable_entity()
-
         _bannerImage = _json['bannerImage']
         _startDate = _json['startDate']
         _endDate = _json['endDate']
@@ -80,15 +71,6 @@ def show_banner(bannerId):
 def update_banner(bannerId):
     try:
         _json = request.json
-
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'bannerImage' and 'startDate' and 'endDate' \
-                and 'sequence' and 'recordStatus' not in _json:
-            return unprocessable_entity()
 
         _bannerImage = _json['bannerImage']
         _startDate = _json['startDate']

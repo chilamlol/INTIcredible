@@ -11,14 +11,6 @@ def add_faq():
     try:
         _json = request.json
 
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'question' and 'answer' and 'recordStatus' and 'faqCatId' not in _json:
-            return unprocessable_entity()
-
         _question = _json['question']
         _answer = _json['answer']
         _recordStatus = _json['recordStatus']
@@ -124,14 +116,6 @@ def show_faq(faqId):
 def update_faq(faqId):
     try:
         _json = request.json
-
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'question' and 'answer' and 'recordStatus' and 'faqCatId' not in _json:
-            return unprocessable_entity()
 
         _question = _json['question']
         _answer = _json['answer']

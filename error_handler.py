@@ -5,27 +5,17 @@ from flask import request, jsonify
 @app.errorhandler(400)
 def bad_request(error=None):
     message = {
-        'message': 'Request body is empty or missing: ' + request.url,
+        'error': 'Missing Required Parameters: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 400
     return resp
 
 
-@app.errorhandler(422)
-def unprocessable_entity(error=None):
-    message = {
-        'message': 'JSON parameter incomplete: ' + request.url,
-    }
-    resp = jsonify(message)
-    resp.status_code = 422
-    return resp
-
-
 @app.errorhandler(404)
 def not_found(error=None):
     message = {
-        'message': 'Record not found: ' + request.url,
+        'error': 'Record not found: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 400
@@ -35,7 +25,7 @@ def not_found(error=None):
 @app.errorhandler(500)
 def internal_server_error(error=None):
     message = {
-        'message': request.url + ' is currently unable to handle this request.'
+        'error': 'The server encountered an internal error or misconfiguration and was unable to complete your process: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 500

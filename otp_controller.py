@@ -46,14 +46,6 @@ def verifyOTP(email):
     try:
         _json = request.json
 
-        # return if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return if json parameter incomplete
-        if 'userId' and 'otp' not in _json:
-            return unprocessable_entity()
-
         _otp = _json['otp']
 
         if _otp and request.method == 'POST':
@@ -64,15 +56,17 @@ def verifyOTP(email):
             # Invalid personal email
             if not result:
                 return not_found()
+
             # User input OTP match with OTP sent, update status
             if result['otp'] == _otp:
                 resp = jsonify(otpVerify=1, message="Successfully verified")
                 resp.status_code = 200
-                return resp
 
-        resp = jsonify(otpVerify=0, message="Unsuccessful verification")
-        resp.status_code = 400
-        return resp
+            resp = jsonify(otpVerify=0, message="Unsuccessful verification")
+            resp.status_code = 400
+            return resp
+
+        return bad_request()
 
     except Exception as e:
         print(e)

@@ -10,14 +10,6 @@ def add_faq_category():
     try:
         _json = request.json
 
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'name' and 'recordStatus' not in _json:
-            return unprocessable_entity()
-
         _name = _json['name']
         _recordStatus = _json['recordStatus']
 
@@ -79,14 +71,6 @@ def show_faq_category(faqCatId):
 def update_faq_category(faqCatId):
     try:
         _json = request.json
-
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'name' and 'recordStatus' not in _json:
-            return unprocessable_entity()
 
         _name = _json['name']
         _recordStatus = _json['recordStatus']

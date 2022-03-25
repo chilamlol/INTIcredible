@@ -15,15 +15,6 @@ def add_event():
     try:
         _json = request.json
 
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'name' and 'description' and 'image' and 'registerLink' \
-                and 'startDate' and 'endDate' and 'status' not in _json:
-            return unprocessable_entity()
-
         _name = _json['name']
         _description = _json['description']
         _image = _json['image']
@@ -95,15 +86,6 @@ def show_event(eventId):
 def update_event(eventId):
     try:
         _json = request.json
-
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'name' and 'description' and 'image' and 'registerLink' \
-                and 'startDate' and 'endDate' and 'status' not in _json:
-            return unprocessable_entity()
 
         _name = _json['name']
         _description = _json['description']

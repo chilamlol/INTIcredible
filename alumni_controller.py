@@ -10,16 +10,6 @@ def add_alumni():
     try:
         _json = request.json
 
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'name' and 'identificationCard' and 'studentId' and 'personalEmail' and 'studentHandphone' \
-                and 'studentTelephoneNumber' and 'graduatingCampus' and 'yearOfGraduation' and 'graduatingProgramme' \
-                and 'graduatedProgrammeName' and 'levelOfStudy' not in _json:
-            return unprocessable_entity()
-
         _name = _json['name']
         _identificationCard = _json['identificationCard']
         _studentId = _json['studentId']
@@ -50,6 +40,7 @@ def add_alumni():
                 resp.status_code = 201
                 return resp
 
+        # Return error if missing parameter
         return bad_request()
 
     except Exception as e:
@@ -96,16 +87,6 @@ def update_alumni(alumniId):
     try:
         _json = request.json
 
-        # return error if json body is empty
-        if not _json:
-            return bad_request()
-
-        # return error if json parameter incomplete
-        if 'name' and 'identificationCard' and 'studentId' and 'personalEmail' and 'studentHandphone' \
-                and 'studentTelephoneNumber' and 'graduatingCampus' and 'yearOfGraduation' and 'graduatingProgramme' \
-                and 'graduatedProgrammeName' and 'levelOfStudy' not in _json:
-            return unprocessable_entity()
-
         _name = _json['name']
         _identificationCard = _json['identificationCard']
         _studentId = _json['studentId']
@@ -137,6 +118,7 @@ def update_alumni(alumniId):
                 resp.status_code = 200
                 return resp
 
+        # Return error if missing parameter
         return not_found()
 
     except Exception as e:
