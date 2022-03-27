@@ -1,6 +1,7 @@
 import jwt
 from db_execution import *
 from flask import request, jsonify
+from functools import wraps
 
 
 # decorator for verifying the JWT
