@@ -79,7 +79,7 @@ def show_all_upcoming_event(day):
         if day < 0:
             return bad_request()
 
-        sql = "SELECT *, DATEDIFF(NOW(), startDate) AS 'date' FROM tbl_event WHERE status = 1 AND DATEDIFF(NOW(), startDate)"
+        sql = "SELECT * FROM tbl_event WHERE status = 1 AND DATEDIFF(NOW(), startDate)"
 
         # If day = 0, then print all upcoming events
         if day == 0:
