@@ -132,7 +132,8 @@
       <workItem from="1648146741703" duration="1123000" />
       <workItem from="1648185425803" duration="4693000" />
       <workItem from="1648362082776" duration="14189000" />
-      <workItem from="1648389412622" duration="633000" />
+      <workItem from="1648389412622" duration="937000" />
+      <workItem from="1648390434445" duration="34000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -274,7 +275,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648376426063</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added JWT">
+      <created>1648390093041</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1648390093041</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
