@@ -6,6 +6,7 @@ from error_handler import *
 
 # add FAQ category
 @app.route('/faq/category/add', methods=['POST'])
+@is_admin
 def add_faq_category():
     try:
         _json = request.json
@@ -32,6 +33,7 @@ def add_faq_category():
 
 # list all FAQ category
 @app.route('/faq/category')
+@token_required
 def show_all_faq_category():
     try:
         sql = "SELECT * FROM tbl_faq_category"
@@ -46,6 +48,7 @@ def show_all_faq_category():
 
 # list specific FAQ category
 @app.route('/faq/category/<int:faqCatId>')
+@token_required
 def show_faq_category(faqCatId):
     try:
         sql = "SELECT * FROM tbl_faq_category WHERE faqCatId=%s"
@@ -65,6 +68,7 @@ def show_faq_category(faqCatId):
 
 # Update FAQ category
 @app.route('/faq/category/update/<int:faqCatId>', methods=['PUT'])
+@is_admin
 def update_faq_category(faqCatId):
     try:
         _json = request.json
@@ -91,6 +95,7 @@ def update_faq_category(faqCatId):
 
 # Delete FAQ category
 @app.route('/faq/category/delete/<int:faqCatId>', methods=['DELETE'])
+@is_admin
 def delete_faq_category(faqCatId):
     try:
         sql = "DELETE FROM tbl_faq_category WHERE faqCatId=%s"

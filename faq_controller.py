@@ -7,6 +7,7 @@ import json
 
 # add FAQ
 @app.route('/faq/add', methods=['POST'])
+@is_admin
 def add_faq():
     try:
         _json = request.json
@@ -35,6 +36,7 @@ def add_faq():
 
 # list all FAQ
 @app.route('/faq')
+@token_required
 def show_all_faq():
     try:
         sql = "SELECT * FROM tbl_faq"
@@ -50,6 +52,7 @@ def show_all_faq():
 
 # list all FAQ nested
 @app.route('/faq/nested')
+@token_required
 def show_all_faq_nested():
     try:
 
@@ -88,6 +91,7 @@ def show_all_faq_nested():
 
 # list specific FAQ
 @app.route('/faq/<int:faqId>')
+@token_required
 def show_faq(faqId):
     try:
 
@@ -110,6 +114,7 @@ def show_faq(faqId):
 
 # Update FAQ
 @app.route('/faq/update/<int:faqId>', methods=['PUT'])
+@is_admin
 def update_faq(faqId):
     try:
         _json = request.json
@@ -138,6 +143,7 @@ def update_faq(faqId):
 
 # Delete FAQ
 @app.route('/faq/delete/<int:faqId>', methods=['DELETE'])
+@is_admin
 def delete_faq(faqId):
     try:
         sql = "DELETE FROM tbl_faq WHERE faqId=%s"

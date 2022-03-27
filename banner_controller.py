@@ -6,6 +6,7 @@ from error_handler import *
 
 # add banner
 @app.route('/banner/add', methods=['POST'])
+@is_admin
 def add_banner():
     try:
         _json = request.json
@@ -34,6 +35,7 @@ def add_banner():
 
 # list all banners
 @app.route('/banner')
+@token_required
 def show_all_banner():
     try:
         sql = "SELECT * FROM tbl_banner"
@@ -48,6 +50,7 @@ def show_all_banner():
 
 # list specific banner
 @app.route('/banner/<int:bannerId>')
+@token_required
 def show_banner(bannerId):
     try:
         sql = "SELECT * FROM tbl_banner WHERE bannerId=%s"
@@ -65,6 +68,7 @@ def show_banner(bannerId):
 
 # Update Banner
 @app.route('/banner/update/<int:bannerId>', methods=['PUT'])
+@is_admin
 def update_banner(bannerId):
     try:
         _json = request.json
@@ -93,6 +97,7 @@ def update_banner(bannerId):
 
 # Delete Banner
 @app.route('/banner/delete/<int:bannerId>', methods=['DELETE'])
+@is_admin
 def delete_banner(bannerId):
     try:
 
