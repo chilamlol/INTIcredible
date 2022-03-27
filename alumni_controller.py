@@ -50,6 +50,7 @@ def add_alumni():
 
 # list all alumni
 @app.route('/alumni')
+@token_required
 def show_all_alumni():
     try:
         sql = "SELECT * FROM tbl_alumni"

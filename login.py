@@ -5,6 +5,7 @@ from flask import jsonify, request
 import uuid
 import hashlib
 from db_execution import *
+import jwt
 
 
 #Only extracting integer from string
@@ -21,6 +22,10 @@ def md5Hash(s):
 #Generate UUID for user
 def generateUUID():
     return uuid.uuid4()
+
+
+def generateToken(guid):
+    return jwt.encode(guid, app.config['SECRET_KEY'])
 
 
 # login status (1 = invalid credential, 2 = login successful)
@@ -46,7 +51,11 @@ def verifyUser():
 
                 # If password validate successful
                 if row[2] == _password:
-                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4], name=alumniName)  # Login Successful
+
+                    # Generate token if login successful
+                    token = generateToken(row[5])
+
+                    return jsonify(loginStatus=2, userID=row[0], activationStatus=row[4], name=alumniName, token=token)  # Login Successful
                 else:
                     return jsonify(loginStatus=1, userID=0, activationStatus=0)  # Invalid credential
             else:

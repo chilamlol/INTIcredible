@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/event_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/event_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alumni_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/alumni_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token_verifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/token_verifier.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +131,7 @@
       <workItem from="1648133199070" duration="12689000" />
       <workItem from="1648146741703" duration="1123000" />
       <workItem from="1648185425803" duration="4693000" />
-      <workItem from="1648362082776" duration="2767000" />
+      <workItem from="1648362082776" duration="4500000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -228,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648364729786</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="remove unwanted data">
+      <created>1648364892987</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1648364892987</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,6 +271,7 @@
     <MESSAGE value="added new route for account info query" />
     <MESSAGE value="edit error message" />
     <MESSAGE value="added new API for upcoming event" />
-    <option name="LAST_COMMIT_MESSAGE" value="added new API for upcoming event" />
+    <MESSAGE value="remove unwanted data" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove unwanted data" />
   </component>
 </project>
