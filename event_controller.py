@@ -58,6 +58,7 @@ def show_all_event():
 
         result = []
 
+        # Convert date time format for output
         for row in rows:
             row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
             row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
@@ -66,6 +67,45 @@ def show_all_event():
         resp = jsonify(result)
         resp.status_code = 200
         return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
+
+# List all upcoming events
+@app.route('/event/upcoming/<int:day>')
+def show_all_upcoming_event(day):
+    try:
+        if day < 0:
+            return bad_request()
+
+        sql = "SELECT *, DATEDIFF(NOW(), startDate) AS 'date' FROM tbl_event WHERE status = 1 AND DATEDIFF(NOW(), startDate)"
+
+        # If day = 0, then print all upcoming events
+        if day == 0:
+            sql += " <= %s"
+        # Else print upcoming events within day given
+        else:
+            day = -abs(day)
+            sql += " >= %s"
+
+        rows = readAllRecord(sql, day)
+
+        result = []
+
+        # Convert date time format for output
+        for row in rows:
+            row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
+            result.append(row)
+
+        if not result:
+            return not_found()
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+
     except Exception as e:
         print(e)
         return internal_server_error(e)

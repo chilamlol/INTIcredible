@@ -34,13 +34,13 @@ def createRecord(sql, data):
         conn.close()
 
 
-def readAllRecord(sql):
+def readAllRecord(sql, parameter=None):
     conn = None
     cursor = None
     try:
         conn = mysql.connect()
         cursor = conn.cursor(pymysql.cursors.DictCursor)
-        cursor.execute(sql)
+        cursor.execute(sql, parameter)
         return cursor.fetchall()
     except Exception as e:
         print(e)
