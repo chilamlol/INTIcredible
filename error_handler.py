@@ -12,6 +12,26 @@ def bad_request(error=None):
     return resp
 
 
+@app.errorhandler(401)
+def unauthorized(error=None):
+    message = {
+        'error': 'Token is invalid: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 401
+    return resp
+
+
+@app.errorhandler(403)
+def forbidden(error=None):
+    message = {
+        'error': 'Invalid credentials: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 403
+    return resp
+
+
 @app.errorhandler(404)
 def not_found(error=None):
     message = {

@@ -2,11 +2,12 @@ from app import app
 from flask import jsonify, request
 from db_execution import *
 from error_handler import *
-from token_verifier import token_required
+from token_verifier import *
 
 
 # add alumni
 @app.route('/alumni/add', methods=['POST'])
+@is_admin
 def add_alumni():
     try:
         _json = request.json
@@ -23,23 +24,18 @@ def add_alumni():
         _graduatedProgrammeName = _json['graduatedProgrammeName']
         _levelOfStudy = _json['levelOfStudy']
 
-        # validate the received values
-        if _name and _identificationCard and _studentId and _personalEmail \
-                and _graduatingCampus and _yearOfGraduation and _graduatingProgramme \
-                and _graduatedProgrammeName and _levelOfStudy and request.method == 'POST':
+        # save edits
+        sql = "INSERT INTO tbl_alumni(name, identificationCard, studentId, personalEmail, " \
+              "studentHandphone, studentTelephoneNumber, graduatingCampus, yearOfGraduation, " \
+              "graduatingProgramme, graduatedProgrammeName, levelOfStudy) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
-            # save edits
-            sql = "INSERT INTO tbl_alumni(name, identificationCard, studentId, personalEmail, " \
-                  "studentHandphone, studentTelephoneNumber, graduatingCampus, yearOfGraduation, " \
-                  "graduatingProgramme, graduatedProgrammeName, levelOfStudy) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone, _studentTelephoneNumber,
+                _graduatingCampus, _yearOfGraduation, _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy)
 
-            data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone, _studentTelephoneNumber,
-                    _graduatingCampus, _yearOfGraduation, _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy)
-
-            if createRecord(sql, data) > 0:
-                resp = jsonify(message='Alumni added successfully')
-                resp.status_code = 201
-                return resp
+        if createRecord(sql, data) > 0:
+            resp = jsonify(message='Alumni added successfully')
+            resp.status_code = 201
+            return resp
 
         # Return error if missing parameter
         return bad_request()
@@ -66,6 +62,7 @@ def show_all_alumni():
 
 # list specific alumni
 @app.route('/alumni/<int:alumniId>')
+@token_required
 def show_alumni(alumniId):
     try:
         sql = "SELECT * FROM tbl_alumni WHERE alumniId=%s"
@@ -85,6 +82,7 @@ def show_alumni(alumniId):
 
 # Update alumni
 @app.route('/alumni/update/<int:alumniId>', methods=['PUT'])
+@is_admin
 def update_alumni(alumniId):
     try:
         _json = request.json
@@ -101,24 +99,19 @@ def update_alumni(alumniId):
         _graduatedProgrammeName = _json['graduatedProgrammeName']
         _levelOfStudy = _json['levelOfStudy']
 
-        # validate the received values
-        if _name and _identificationCard and _studentId and _personalEmail \
-                and _graduatingCampus and _yearOfGraduation and _graduatingProgramme \
-                and _graduatedProgrammeName and _levelOfStudy and request.method == 'PUT':
+        # save edits
+        sql = "UPDATE tbl_alumni SET name=%s, identificationCard=%s, studentId=%s, personalEmail=%s, " \
+              "studentHandphone=%s, studentTelephoneNumber=%s, graduatingCampus=%s, yearOfGraduation=%s, " \
+              "graduatingProgramme=%s, graduatedProgrammeName=%s, levelOfStudy=%s WHERE alumniId=%s"
 
-            # save edits
-            sql = "UPDATE tbl_alumni SET name=%s, identificationCard=%s, studentId=%s, personalEmail=%s, " \
-                  "studentHandphone=%s, studentTelephoneNumber=%s, graduatingCampus=%s, yearOfGraduation=%s, " \
-                  "graduatingProgramme=%s, graduatedProgrammeName=%s, levelOfStudy=%s WHERE alumniId=%s"
+        data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone,
+                _studentTelephoneNumber, _graduatingCampus, _yearOfGraduation,
+                _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy, alumniId)
 
-            data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone,
-                    _studentTelephoneNumber, _graduatingCampus, _yearOfGraduation,
-                    _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy, alumniId)
-
-            if updateRecord(sql, data) > 0:
-                resp = jsonify(message='Alumni updated successfully!')
-                resp.status_code = 200
-                return resp
+        if updateRecord(sql, data) > 0:
+            resp = jsonify(message='Alumni updated successfully!')
+            resp.status_code = 200
+            return resp
 
         # Return error if missing parameter
         return not_found()
@@ -130,6 +123,7 @@ def update_alumni(alumniId):
 
 # Delete Alumni
 @app.route('/alumni/delete/<int:alumniId>', methods=['DELETE'])
+@is_admin
 def delete_alumni(alumniId):
     try:
         sql = "DELETE FROM tbl_alumni WHERE alumniId=%s"

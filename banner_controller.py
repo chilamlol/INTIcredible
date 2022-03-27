@@ -16,17 +16,14 @@ def add_banner():
         _sequence = _json['sequence']
         _recordStatus = _json['recordStatus']
 
-        # validate the received values
-        if _bannerImage and _startDate and _endDate \
-                and _sequence and _recordStatus and request.method == 'POST':
-            # save edits
-            sql = "INSERT INTO tbl_banner(bannerImage, startDate, endDate, sequence, recordStatus) VALUES(%s, %s, %s, %s, %s)"
-            data = (_bannerImage, _startDate, _endDate, _sequence, _recordStatus)
+        # save edits
+        sql = "INSERT INTO tbl_banner(bannerImage, startDate, endDate, sequence, recordStatus) VALUES(%s, %s, %s, %s, %s)"
+        data = (_bannerImage, _startDate, _endDate, _sequence, _recordStatus)
 
-            if createRecord(sql, data) > 0:
-                resp = jsonify(message='Banner added successfully')
-                resp.status_code = 201
-                return resp
+        if createRecord(sql, data) > 0:
+            resp = jsonify(message='Banner added successfully')
+            resp.status_code = 201
+            return resp
 
         return bad_request()
 
@@ -78,17 +75,14 @@ def update_banner(bannerId):
         _sequence = _json['sequence']
         _recordStatus = _json['recordStatus']
 
-        # validate the received values
-        if _bannerImage and _startDate and _endDate \
-                and _sequence and _recordStatus and request.method == 'PUT':
-            # save edits
-            sql = "UPDATE tbl_banner SET bannerImage=%s, startDate=%s, endDate=%s, sequence=%s, recordStatus=%s WHERE bannerId=%s"
-            data = (_bannerImage, _startDate, _endDate, _sequence, _recordStatus, bannerId)
+        # save edits
+        sql = "UPDATE tbl_banner SET bannerImage=%s, startDate=%s, endDate=%s, sequence=%s, recordStatus=%s WHERE bannerId=%s"
+        data = (_bannerImage, _startDate, _endDate, _sequence, _recordStatus, bannerId)
 
-            if updateRecord(sql, data) > 0:
-                resp = jsonify(message='Banner updated successfully')
-                resp.status_code = 200
-                return resp
+        if updateRecord(sql, data) > 0:
+            resp = jsonify(message='Banner updated successfully')
+            resp.status_code = 200
+            return resp
 
         return not_found()
 

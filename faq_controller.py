@@ -16,18 +16,15 @@ def add_faq():
         _recordStatus = _json['recordStatus']
         _faqCatId = _json['faqCatId']
 
-        # validate the received values
-        if _question and _answer and _recordStatus and _faqCatId and request.method == 'POST':
+        # save edits
+        sql = "INSERT INTO tbl_faq(question, answer, recordStatus, faqCatId) VALUES(%s, %s, %s, %s)"
 
-            # save edits
-            sql = "INSERT INTO tbl_faq(question, answer, recordStatus, faqCatId) VALUES(%s, %s, %s, %s)"
+        data = (_question, _answer, _recordStatus, _faqCatId)
 
-            data = (_question, _answer, _recordStatus, _faqCatId)
-
-            if createRecord(sql, data) > 0:
-                resp = jsonify('FAQ added successfully!')
-                resp.status_code = 200
-                return resp
+        if createRecord(sql, data) > 0:
+            resp = jsonify('FAQ added successfully!')
+            resp.status_code = 200
+            return resp
 
         return not_found()
 
@@ -122,18 +119,15 @@ def update_faq(faqId):
         _recordStatus = _json['recordStatus']
         _faqCatId = _json['faqCatId']
 
-        # validate the received values
-        if _question and _answer and _recordStatus and _faqCatId and request.method == 'PUT':
+        # save edited
+        sql = "UPDATE tbl_faq SET question=%s, answer=%s, recordStatus=%s, faqCatId=%s WHERE faqId=%s"
 
-            # save edited
-            sql = "UPDATE tbl_faq SET question=%s, answer=%s, recordStatus=%s, faqCatId=%s WHERE faqId=%s"
+        data = (_question, _answer, _recordStatus, _faqCatId, faqId)
 
-            data = (_question, _answer, _recordStatus, _faqCatId, faqId)
-
-            if updateRecord(sql, data) > 0:
-                resp = jsonify(message='FAQ updated successfully')
-                resp.status_code = 200
-                return resp
+        if updateRecord(sql, data) > 0:
+            resp = jsonify(message='FAQ updated successfully')
+            resp.status_code = 200
+            return resp
 
         return not_found()
 
@@ -147,7 +141,7 @@ def update_faq(faqId):
 def delete_faq(faqId):
     try:
         sql = "DELETE FROM tbl_faq WHERE faqId=%s"
-        if deleteRecord(sql, alumniId) > 0:
+        if deleteRecord(sql, faqId) > 0:
             resp = jsonify(message='FAQ deleted successfully')
             resp.status_code = 200
             return resp

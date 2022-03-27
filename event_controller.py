@@ -4,6 +4,7 @@ from db_execution import *
 from error_handler import *
 from datetime import datetime
 import json
+from token_verifier import *
 
 
 def convertStringToDateTime(str):
@@ -12,6 +13,7 @@ def convertStringToDateTime(str):
 
 # add events
 @app.route('/event/add', methods=['POST'])
+@is_admin
 def add_event():
     try:
         _json = request.json
@@ -24,23 +26,15 @@ def add_event():
         _endDate = _json['endDate']
         _status = _json['status']
 
-        # validate the received values
-        if _name and _description and _image and _registerLink \
-                and _startDate and _endDate and _status and request.method == 'POST':
+        # save edits
+        sql = "INSERT INTO tbl_event(name, description, image, registerLink, startDate, endDate, status) VALUES(%s, %s, %s, %s, %s, %s, %s)"
 
-            # save edits
-            sql = "INSERT INTO tbl_event(name, description, image, registerLink, startDate, endDate, status) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+        data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status)
 
-            # Convert string to Date time
-            startDate = str(convertStringToDateTime(_startDate))
-            endDate = str(convertStringToDateTime(_endDate))
-
-            data = (_name, _description, _image, _registerLink, startDate, endDate, _status)
-
-            if createRecord(sql, data) > 0:
-                resp = jsonify(message='Event added successfully!')
-                resp.status_code = 201
-                return resp
+        if createRecord(sql, data) > 0:
+            resp = jsonify(message='Event added successfully!')
+            resp.status_code = 201
+            return resp
 
         return bad_request()
 
@@ -51,6 +45,7 @@ def add_event():
 
 # list all events
 @app.route('/event')
+@token_required
 def show_all_event():
     try:
         sql = "SELECT * FROM tbl_event"
@@ -74,6 +69,7 @@ def show_all_event():
 
 # List all upcoming events
 @app.route('/event/upcoming/<int:day>')
+@token_required
 def show_all_upcoming_event(day):
     try:
         if day < 0:
@@ -113,6 +109,7 @@ def show_all_upcoming_event(day):
 
 # list specific event
 @app.route('/event/<int:eventId>')
+@token_required
 def show_event(eventId):
     try:
         sql = "SELECT * FROM tbl_event WHERE eventId=%s"
@@ -136,31 +133,20 @@ def show_event(eventId):
 
 # Update event
 @app.route('/event/update/<int:eventId>', methods=['PUT'])
+@is_admin
 def update_event(eventId):
     try:
         _json = request.json
 
-        _name = _json['name']
-        _description = _json['description']
-        _image = _json['image']
-        _registerLink = _json['registerLink']
-        _startDate = _json['startDate']
-        _endDate = _json['endDate']
-        _status = _json['status']
+        # save edits
+        sql = "UPDATE tbl_event SET name=%s, description=%s, image=%s, registerLink=%s, startDate=%s, endDate=%s, status=%s WHERE eventId=%s"
 
-        # validate the received values
-        if _name and _description and _image and _registerLink \
-                and _startDate and _endDate and _status and request.method == 'PUT':
+        data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status, eventId)
 
-            # save edits
-            sql = "UPDATE tbl_event SET name=%s, description=%s, image=%s, registerLink=%s, startDate=%s, endDate=%s, status=%s WHERE eventId=%s"
-
-            data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status, eventId)
-
-            if updateRecord(sql, data) > 0:
-                resp = jsonify(message='Event updated successfully')
-                resp.status_code = 200
-                return resp
+        if updateRecord(sql, data) > 0:
+            resp = jsonify(message='Event updated successfully')
+            resp.status_code = 200
+            return resp
 
         return not_found()
 
@@ -171,6 +157,7 @@ def update_event(eventId):
 
 # Delete Event
 @app.route('/event/delete/<int:eventId>', methods=['DELETE'])
+@is_admin
 def delete_event(eventId):
     try:
         sql = "DELETE FROM tbl_event WHERE eventId=%s"

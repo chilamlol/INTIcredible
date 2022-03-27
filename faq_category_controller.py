@@ -13,18 +13,15 @@ def add_faq_category():
         _name = _json['name']
         _recordStatus = _json['recordStatus']
 
-        # validate the received values
-        if _name and _recordStatus and request.method == 'POST':
+        # save edits
+        sql = "INSERT INTO tbl_faq_category(name, recordStatus) VALUES(%s, %s)"
 
-            # save edits
-            sql = "INSERT INTO tbl_faq_category(name, recordStatus) VALUES(%s, %s)"
+        data = (_name, _recordStatus)
 
-            data = (_name, _recordStatus)
-
-            if createRecord(sql, data) > 0:
-                resp = jsonify(message='FAQ category added successfully')
-                resp.status_code = 200
-                return resp
+        if createRecord(sql, data) > 0:
+            resp = jsonify(message='FAQ category added successfully')
+            resp.status_code = 200
+            return resp
 
         return bad_request()
 
@@ -75,18 +72,15 @@ def update_faq_category(faqCatId):
         _name = _json['name']
         _recordStatus = _json['recordStatus']
 
-        # validate the received values
-        if _name and _recordStatus and request.method == 'PUT':
+        # save edits
+        sql = "UPDATE tbl_faq_category SET name=%s, recordStatus=%s WHERE faqCatId=%s"
 
-            # save edits
-            sql = "UPDATE tbl_faq_category SET name=%s, recordStatus=%s WHERE faqCatId=%s"
+        data = (_name, _recordStatus, faqCatId)
 
-            data = (_name, _recordStatus, faqCatId)
-
-            if updateRecord(sql, data) > 0:
-                resp = jsonify(message='FAQ category updated successfully')
-                resp.status_code = 200
-                return resp
+        if updateRecord(sql, data) > 0:
+            resp = jsonify(message='FAQ category updated successfully')
+            resp.status_code = 200
+            return resp
 
         return not_found()
 
