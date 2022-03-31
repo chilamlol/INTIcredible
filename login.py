@@ -12,8 +12,8 @@ from error_handler import *
 
 # Login status
 class loginStatus(enum.Enum):
-    Success = 1
-    Invalid = 2
+    Success = 2
+    Invalid = 1
 
 
 # Only extracting integer from string
