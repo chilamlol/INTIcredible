@@ -138,6 +138,14 @@ def update_event(eventId):
     try:
         _json = request.json
 
+        _name = _json['name']
+        _description = _json['description']
+        _image = _json['image']
+        _registerLink = _json['registerLink']
+        _startDate = _json['startDate']
+        _endDate = _json['endDate']
+        _status = _json['status']
+
         # save edits
         sql = "UPDATE tbl_event SET name=%s, description=%s, image=%s, registerLink=%s, startDate=%s, endDate=%s, status=%s WHERE eventId=%s"
 
