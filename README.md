@@ -11,6 +11,7 @@ This is the backend API for all the service in INTIcredible app and admin web po
 * PyMySQL
 * Hashlib
 * MySQL 5.7 and above
+* PyJWT
 
 API key is using JWT hashed GUID.
 
