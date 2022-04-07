@@ -38,7 +38,7 @@ def not_found(error=None):
         'error': 'Record not found: ' + request.url,
     }
     resp = jsonify(message)
-    resp.status_code = 400
+    resp.status_code = 404
     return resp
 
 

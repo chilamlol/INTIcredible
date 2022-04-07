@@ -82,7 +82,7 @@ def show_alumni(alumniId):
 
 # Update alumni
 @app.route('/alumni/update/<int:alumniId>', methods=['PUT'])
-@is_admin
+@token_required
 def update_alumni(alumniId):
     try:
         _json = request.json
