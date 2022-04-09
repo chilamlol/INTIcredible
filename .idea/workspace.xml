@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/image.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/banner_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/banner_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faq_category_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/faq_category_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faq_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/faq_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +15,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -38,6 +38,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -133,7 +134,8 @@
       <workItem from="1648185425803" duration="4693000" />
       <workItem from="1648362082776" duration="14189000" />
       <workItem from="1648389412622" duration="937000" />
-      <workItem from="1648390434445" duration="34000" />
+      <workItem from="1648390434445" duration="653000" />
+      <workItem from="1649515956350" duration="371000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -282,7 +284,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648390093041</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added library">
+      <created>1648390479028</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1648390479028</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,6 +329,7 @@
     <MESSAGE value="missing library" />
     <MESSAGE value="bug fix" />
     <MESSAGE value="added JWT" />
-    <option name="LAST_COMMIT_MESSAGE" value="added JWT" />
+    <MESSAGE value="added library" />
+    <option name="LAST_COMMIT_MESSAGE" value="added library" />
   </component>
 </project>
