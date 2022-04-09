@@ -24,7 +24,7 @@ def add_faq():
         data = (_question, _answer, _recordStatus, _faqCatId)
 
         if createRecord(sql, data) > 0:
-            resp = jsonify('FAQ added successfully!')
+            resp = jsonify(message='FAQ added successfully.')
             resp.status_code = 200
             return resp
 
