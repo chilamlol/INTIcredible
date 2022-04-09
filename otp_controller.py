@@ -51,19 +51,21 @@ def verifyOTP(email):
         if _otp and request.method == 'POST':
             sql = "SELECT otp FROM tbl_otp WHERE personalEmail = %s ORDER BY otpId DESC LIMIT 1"
 
-            result = readOneRecord(sql, email)
+            row = readOneRecord(sql, email)
 
             # Invalid personal email
-            if not result:
+            if not row:
                 return not_found()
 
+            # Default value if not match
+            resp = jsonify(otpVerify=0, message="Unsuccessful verification")
+            resp.status_code = 400
+
             # User input OTP match with OTP sent, update status
-            if result['otp'] == _otp:
+            if row['otp'] == _otp:
                 resp = jsonify(otpVerify=1, message="Successfully verified")
                 resp.status_code = 200
 
-            resp = jsonify(otpVerify=0, message="Unsuccessful verification")
-            resp.status_code = 400
             return resp
 
         return bad_request()
