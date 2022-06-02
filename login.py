@@ -26,7 +26,6 @@ def extractOnlyInteger(s):
 def md5Hash(s):
     return hashlib.md5(s.encode()).hexdigest()
 
-
 # Generate UUID for user
 def generateUUID():
     return uuid.uuid4()
@@ -60,7 +59,7 @@ def verifyUser():
                     return jsonify(loginStatus=loginStatus.Success.value, userID=row['userId'],
                                    activationStatus=row['activationStatus'],
                                    name=row['name'],
-                                   token=token, userRole=row['userRoleId'])  # Login Successful
+                                   token=token, userRole=row['userRoleId'],alumniID=row['alumniId'])  # Login Successful
 
                 # Invalid Credentials
                 return jsonify({'error': 'Invalid credentials: ' + request.url}), 401
