@@ -70,13 +70,13 @@ def verifyUser():
                 data = _username
                 row = readOneRecord(sql, data)
                 if row:
-                    rawPassword = row1['graduatingCampus'] + row1['identificationCard']
+                    rawPassword = row['graduatingCampus'] + row['identificationCard']
                     hashedPassword = md5Hash(rawPassword)
 
                     # Compare password with user entered password
                     if hashedPassword == _password:
                         sql = "INSERT INTO tbl_user (username, password, alumniId, activationStatus, GUID) VALUES (%s, %s, %s, %s, %s)"
-                        data = (row1['studentId'], _password, row1['alumniId'], 0, generateUUID())
+                        data = (row['studentId'], _password, row['alumniId'], 0, generateUUID())
                         conn = mysql.connect()
                         cursor = conn.cursor()
                         cursor.execute(sql, data)
@@ -89,14 +89,14 @@ def verifyUser():
                         if row:
                             token = generateToken(row['GUID'])
                             return jsonify(loginStatus=loginStatus.Success.value, userID=row['userId'],
-                                           activationStatus=row['activationStatus'], name=row['name'], token=token, userRole=row['userRoleId'])
+                                           activationStatus=row['activationStatus'], name=row['name'], token=token, userRole=row['userRoleId'],alumniID=row['alumniId'])
                         else:
-                            return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0)
+                            return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,alumniID=0)
                     else:
-                        return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0)  # Invalid credential
+                        return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,alumniID=0)  # Invalid credential
 
                 else:
-                    return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0)  # Invalid credential
+                    return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,alumniID=0)  # Invalid credential
 
         return bad_request()
     except Exception as e:
