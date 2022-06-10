@@ -98,12 +98,11 @@ def update_alumni(alumniId):
         _graduatingProgramme = _json['graduatingProgramme']
         _graduatedProgrammeName = _json['graduatedProgrammeName']
         _levelOfStudy = _json['levelOfStudy']
-        _image = _json['image']
 
         # save edits
         sql = "UPDATE tbl_alumni SET name=%s, identificationCard=%s, studentId=%s, personalEmail=%s, " \
               "studentHandphone=%s, studentTelephoneNumber=%s, graduatingCampus=%s, yearOfGraduation=%s, " \
-              "graduatingProgramme=%s, graduatedProgrammeName=%s, levelOfStudy=%s, image = %s WHERE alumniId=%s"
+              "graduatingProgramme=%s, graduatedProgrammeName=%s, levelOfStudy=%s WHERE alumniId=%s"
 
         data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone,
                 _studentTelephoneNumber, _graduatingCampus, _yearOfGraduation,
