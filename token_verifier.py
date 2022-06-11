@@ -1,6 +1,6 @@
 from app import app
 import jwt
-from db_execution import *
+from database.db_execution import *
 from flask import request, jsonify
 from functools import wraps
 from error_handler import *

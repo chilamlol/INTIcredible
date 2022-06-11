@@ -1,10 +1,10 @@
 from app import app
 import pymysql
-from db_config import mysql
+from database.db_config import mysql
 from flask import jsonify, request
 import uuid
 import hashlib
-from db_execution import *
+from database.db_execution import *
 import jwt
 import enum
 from error_handler import *

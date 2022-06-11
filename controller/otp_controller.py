@@ -1,12 +1,11 @@
 from app import app
-from flask import jsonify
-from flask import request
+from flask import jsonify, request
 from flask_mail import Message
 from random import randint
-from mail_config import mail
+from mail_config import *
 from email_template import *
 from error_handler import *
-from db_execution import *
+from database.db_execution import *
 
 
 def getOTP():

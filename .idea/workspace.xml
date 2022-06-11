@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/image.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image_controller.py" afterDir="false" />
+    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="added library">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/alumni_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/banner_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_execution.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/event_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/faq_category_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/faq_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/otp_controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/route.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token_verifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/token_verifier.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -136,6 +147,8 @@
       <workItem from="1648389412622" duration="937000" />
       <workItem from="1648390434445" duration="653000" />
       <workItem from="1649515956350" duration="371000" />
+      <workItem from="1654947729331" duration="573000" />
+      <workItem from="1654953497067" duration="3090000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>

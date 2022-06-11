@@ -1,5 +1,5 @@
 import pymysql
-from db_config import mysql
+from database.db_config import mysql
 
 
 def readOneRecord(sql, parameter):
