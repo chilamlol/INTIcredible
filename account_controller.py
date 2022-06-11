@@ -82,9 +82,9 @@ def update_user_profile(userId):
 
 # get userId and email by username
 @app.route("/account/info/<string:username>")
-def get_userId_and_email_by_username(username):
+def get_user_info_and_email_by_username(username):
     try:
-        sql = "SELECT tu.userId, ta.personalEmail FROM tbl_user tu JOIN tbl_alumni ta ON tu.username = ta.studentId WHERE tu.username=%s"
+        sql = "SELECT tu.*, ta.personalEmail FROM tbl_user tu JOIN tbl_alumni ta ON tu.username = ta.studentId WHERE tu.username=%s"
 
         row = readOneRecord(sql, username)
 
