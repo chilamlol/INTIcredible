@@ -34,7 +34,7 @@ def upload_file():
             file.save(os.path.join('/home/chilamlol/INTIcredible/static/', filename))
 
             resp = jsonify(message="Image uploaded")
-            resp.status_code=201
+            resp.status_code = 201
             return resp
 
         return internal_server_error()
