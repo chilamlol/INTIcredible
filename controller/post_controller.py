@@ -97,7 +97,7 @@ def show_post(postId):
 def show_all_post_nested():
     try:
         # Requires MySQL 5.7 and above
-        sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.post, 'file', tp.file, " \
+        sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
               " 'image', tp.image, 'approval', tp.approval, 'createdDate', tp.createdDate, 'modifiedDate', tp.modifiedDate, " \
               " 'status', tp.status, userId, tp.userId, 'comment', tc.commentList)) " \
               " FROM " \
@@ -108,7 +108,7 @@ def show_all_post_nested():
               " 'modifiedDate', modifiedDate, 'status', status, 'userId', userId)) commentList " \
               " FROM tbl_comment" \
               " GROUP BY postId" \
-              " ) tc ON tp.postId = tc.postId WHERE tc.comment IS NOT NULL"
+              " ) tc ON tp.postId = tc.postId WHERE tc.commentList IS NOT NULL"
 
         row = readNestedRecord(sql)
 
