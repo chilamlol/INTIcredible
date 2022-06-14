@@ -8,6 +8,7 @@ from controller.banner_controller import *
 from controller.account_controller import *
 from controller.image_controller import *
 from controller.post_controller import *
+from controller.comment_controller import *
 
 
 @app.route("/")
