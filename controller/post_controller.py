@@ -100,7 +100,7 @@ def show_all_post_nested():
         sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
               " 'image', tp.image, 'approval', tp.approval, 'createdDate', DATE_FORMAT(tp.createdDate, '%Y-%m-%d %T'), " \
               " 'modifiedDate', DATE_FORMAT(tp.modifiedDate, '%Y-%m-%d %T'), " \
-              " 'status', tp.status, userId, tp.userId, 'comment', tc.commentList)) " \
+              " 'status', tp.status, 'userId', tp.userId, 'comment', tc.commentList)) " \
               " FROM " \
               " tbl_post tp " \
               " LEFT JOIN ( " \
