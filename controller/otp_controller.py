@@ -10,7 +10,7 @@ from database.db_execution import *
 
 def getOTP():
     # Generate random 6 digit OTP
-    return randint(000000, 999999)
+    return str(randint(0, 999999)).rjust(6, "0")
 
 
 # sendOTP
@@ -21,7 +21,7 @@ def sendOTP(email):
         otp = getOTP()
 
         # Send OTP to email
-        msg = Message('OTP', recipients=email.split())
+        msg = Message('INTIcredibles - OTP Verification', sender=('INTIcredibles', 'noreply.inticredibles@gmail.com'), recipients=email.split())
         msg.html = emailOTP(otp)
         mail.send(msg)
 
