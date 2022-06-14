@@ -2,6 +2,7 @@ from app import app
 from flask import jsonify, request
 from database.db_execution import *
 from error_handler import *
+import json
 from token_verifier import *
 
 
@@ -10,7 +11,8 @@ def convertStringToDateTime(str):
 
 
 # create post
-@app.route('/post/add', methods=['POST'])  # @is_admin
+@app.route('/post/add', methods=['POST'])
+# @token_required
 def add_post():
     try:
         _json = request.json
@@ -42,7 +44,8 @@ def add_post():
 
 
 # list all post
-@app.route('/post')  # @token_required
+@app.route('/post')
+# @token_required
 def show_all_post():
     try:
         sql = "SELECT * FROM tbl_post"
@@ -65,7 +68,8 @@ def show_all_post():
 
 
 # list specific post
-@app.route('/post/<int:postId>')  # @token_required
+@app.route('/post/<int:postId>')
+# @token_required
 def show_post(postId):
     try:
         sql = "SELECT * FROM tbl_post WHERE postId=%s"
@@ -87,8 +91,44 @@ def show_post(postId):
         return internal_server_error(e)
 
 
+# list post and their comment
+@app.route('/post/nested')
+# @token_required
+def show_all_post_nested():
+    try:
+        # Requires MySQL 5.7 and above
+        sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.post, 'file', tp.file, " \
+              " 'image', tp.image, 'approval', tp.approval, 'createdDate', tp.createdDate, 'modifiedDate', tp.modifiedDate, " \
+              " 'status', tp.status, userId, tp.userId, 'comment', tc.commentList)) " \
+              " FROM " \
+              " tbl_post tp " \
+              " LEFT JOIN ( " \
+              " SELECT postId," \
+              " JSON_ARRAYAGG(JSON_OBJECT('commentId', commentId, 'text', text, 'createdDate', createdDate, " \
+              " 'modifiedDate', modifiedDate, 'status', status, 'userId', userId)) commentList " \
+              " FROM tbl_comment" \
+              " GROUP BY postId" \
+              " ) tp ON tp.postId = tc.postId WHERE tc.comment IS NOT NULL"
+
+        row = readNestedRecord(sql)
+
+        # Convert list to string to remove unwanted characters
+        res = str(row)[2:-3].replace("\\", "")
+
+        # Convert back to JSON
+        resp = jsonify(json.loads(res))
+        resp.status_code = 200
+        return resp
+
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
+
+
 # Update post
-@app.route('/post/update/<int:postId>', methods=['PUT'])  # @token_required
+@app.route('/post/update/<int:postId>', methods=['PUT'])
+# @token_required
 def update_post(postId):
     try:
         _json = request.json
@@ -121,7 +161,8 @@ def update_post(postId):
 
 # Delete post (update status to false)
 # This API doesn't requires admin privilege as user can delete their post.
-@app.route('/post/delete/<int:postId>', methods=['PUT'])  # @token_required
+@app.route('/post/delete/<int:postId>', methods=['PUT'])
+# @token_required
 def delete_post(postId):
     try:
         sql = "UPDATE tbl_post SET modifiedDate = NOW(), status = 'false' WHERE postId=%s"

@@ -73,10 +73,7 @@ def show_all_faq_nested():
         sql = ''' SELECT CONCAT('[', GROUP_CONCAT(CONCAT('{','"faqCatId":"', tfc.faqCatId, '", "name":"',tfc.name,'", "recordStatus":"', tfc.recordStatus, '", "faq":[', IFNULL((SELECT GROUP_CONCAT(CONCAT('{"faqId":"', tf.faqId, '", "question":"', tf.question, '", "answer":"', tf.answer,'"}') SEPARATOR ', ') FROM tbl_faq tf WHERE tf.faqCatId = tfc.faqCatId),''),']','}') SEPARATOR ', '), ']') FROM tbl_faq_category tfc'''
         """
 
-        conn = mysql.connect()
-        cursor = conn.cursor()
-        cursor.execute(sql)
-        row = cursor.fetchone()
+        row = readNestedRecord(sql)
 
         # Convert list to string to remove unwanted characters
         res = str(row)[2:-3].replace("\\", "")
