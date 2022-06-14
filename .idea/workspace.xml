@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/controller/comment_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/faq_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/faq_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/post_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/post_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/db_execution.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db_execution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/route.py" afterDir="false" />
-    </list>
+    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="updated nest json for post read API" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +138,7 @@
       <workItem from="1654953497067" duration="3487000" />
       <workItem from="1655132927569" duration="4886000" />
       <workItem from="1655139673783" duration="968000" />
-      <workItem from="1655189870977" duration="2822000" />
+      <workItem from="1655189870977" duration="3321000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -336,7 +329,28 @@
       <option name="project" value="LOCAL" />
       <updated>1655140607103</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="added db execution for nested json">
+      <created>1655192825841</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1655192825841</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added CRUD API for comment">
+      <created>1655192852293</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1655192852293</updated>
+    </task>
+    <task id="LOCAL-00030" summary="updated nest json for post read API">
+      <created>1655192867770</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1655192867770</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,7 +370,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Changed naming conversion and refactored some code" />
     <MESSAGE value="added new API controller for FAQ and FAQ category." />
     <MESSAGE value="Changed naming conversion" />
     <MESSAGE value="Added import to route for API call" />
@@ -379,6 +392,9 @@
     <MESSAGE value="added post API" />
     <MESSAGE value="edit message" />
     <MESSAGE value="added requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="added requirements.txt" />
+    <MESSAGE value="added db execution for nested json" />
+    <MESSAGE value="added CRUD API for comment" />
+    <MESSAGE value="updated nest json for post read API" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated nest json for post read API" />
   </component>
 </project>

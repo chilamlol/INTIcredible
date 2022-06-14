@@ -108,7 +108,7 @@ def show_all_post_nested():
               " 'modifiedDate', modifiedDate, 'status', status, 'userId', userId)) commentList " \
               " FROM tbl_comment" \
               " GROUP BY postId" \
-              " ) tp ON tp.postId = tc.postId WHERE tc.comment IS NOT NULL"
+              " ) tc ON tp.postId = tc.postId WHERE tc.comment IS NOT NULL"
 
         row = readNestedRecord(sql)
 
