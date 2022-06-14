@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/controller/comment_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/faq_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/faq_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/post_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/post_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/db_execution.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/db_execution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/route.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +144,8 @@
       <workItem from="1654947729331" duration="573000" />
       <workItem from="1654953497067" duration="3487000" />
       <workItem from="1655132927569" duration="4886000" />
-      <workItem from="1655139673783" duration="712000" />
+      <workItem from="1655139673783" duration="968000" />
+      <workItem from="1655189870977" duration="2822000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -316,7 +322,21 @@
       <option name="project" value="LOCAL" />
       <updated>1655138853047</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="edit message">
+      <created>1655140475478</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1655140475479</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added requirements.txt">
+      <created>1655140607103</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1655140607103</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,6 +377,8 @@
     <MESSAGE value="added JWT" />
     <MESSAGE value="added library" />
     <MESSAGE value="added post API" />
-    <option name="LAST_COMMIT_MESSAGE" value="added post API" />
+    <MESSAGE value="edit message" />
+    <MESSAGE value="added requirements.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="added requirements.txt" />
   </component>
 </project>
