@@ -98,15 +98,15 @@ def show_all_post_nested():
     try:
         # Requires MySQL 5.7 and above
         sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
-              " 'image', tp.image, 'approval', tp.approval, 'createdDate', DATE_FORMAT(tp.createdDate, 'YYYY-MM-DD hh:mm:ss'), " \
-              " 'modifiedDate', DATE_FORMAT(tp.modifiedDate, 'YYYY-MM-DD hh:mm:ss'), " \
+              " 'image', tp.image, 'approval', tp.approval, 'createdDate', DATE_FORMAT(tp.createdDate, '%Y-%m-%d %T'), " \
+              " 'modifiedDate', DATE_FORMAT(tp.modifiedDate, '%Y-%m-%d %T'), " \
               " 'status', tp.status, userId, tp.userId, 'comment', tc.commentList)) " \
               " FROM " \
               " tbl_post tp " \
               " LEFT JOIN ( " \
               " SELECT postId," \
-              " JSON_ARRAYAGG(JSON_OBJECT('commentId', commentId, 'text', text, 'createdDate', DATE_FORMAT(createdDate, 'YYYY-MM-DD hh:mm:ss'), " \
-              " 'modifiedDate', DATE_FORMAT(modifiedDate, 'YYYY-MM-DD hh:mm:ss'), 'status', status, 'userId', userId)) commentList " \
+              " JSON_ARRAYAGG(JSON_OBJECT('commentId', commentId, 'text', text, 'createdDate', DATE_FORMAT(createdDate, '%Y-%m-%d %T'), " \
+              " 'modifiedDate', DATE_FORMAT(modifiedDate, '%Y-%m-%d %T'), 'status', status, 'userId', userId)) commentList " \
               " FROM tbl_comment" \
               " GROUP BY postId" \
               " ) tc ON tp.postId = tc.postId"
@@ -124,7 +124,6 @@ def show_all_post_nested():
     except Exception as e:
         print(e)
         return internal_server_error(e)
-
 
 
 # Update post

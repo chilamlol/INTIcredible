@@ -25,7 +25,7 @@ def add_comment():
         sql = " INSERT INTO tbl_comment(text, status, createdDate, modifiedDate, " \
               " userId, postId) VALUES (%s, %s, NOW(), NOW(), %s, %s) "
 
-        data = (_text, _status, _userId, postId)
+        data = (_text, _status, _userId, _postId)
 
         if createRecord(sql, data) > 0:
             resp = jsonify(message='Comment added successfully')
