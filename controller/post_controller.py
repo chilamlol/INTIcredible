@@ -24,7 +24,7 @@ def add_post():
 
         # save edits
         sql = " INSERT INTO tbl_post(text, file, image, approval, " \
-              " createdDate, modifiedDate, status, userId) VALUES(%s, %s, %s, 0, NOW(), NOW(), 'false', %s)"
+              " createdDate, modifiedDate, status, userId) VALUES(%s, %s, %s, 0, NOW(), NOW(), 'true', %s)"
 
         data = (_text, _file, _image, _userId)
 
