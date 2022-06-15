@@ -17,15 +17,14 @@ def add_comment():
         _json = request.json
 
         _text = _json['text']
-        _status = _json['status']
         _userId = _json['userId']
         _postId = _json['postId']
 
         # save edits
         sql = " INSERT INTO tbl_comment(text, status, createdDate, modifiedDate, " \
-              " userId, postId) VALUES (%s, %s, NOW(), NOW(), %s, %s) "
+              " userId, postId) VALUES (%s, 'true', NOW(), NOW(), %s, %s) "
 
-        data = (_text, _status, _userId, _postId)
+        data = (_text, _userId, _postId)
 
         if createRecord(sql, data) > 0:
             resp = jsonify(message='Comment added successfully')
