@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="" />
+    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/post_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/post_controller.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -138,7 +141,9 @@
       <workItem from="1654953497067" duration="3487000" />
       <workItem from="1655132927569" duration="4886000" />
       <workItem from="1655139673783" duration="968000" />
-      <workItem from="1655189870977" duration="6175000" />
+      <workItem from="1655189870977" duration="6914000" />
+      <workItem from="1655259555785" duration="63000" />
+      <workItem from="1655259938349" duration="638000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -378,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655195855499</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="debug sql output">
+      <created>1655196176426</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1655196176426</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +410,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Changed naming conversion" />
     <MESSAGE value="Added import to route for API call" />
     <MESSAGE value="Added secret key for encryption" />
     <MESSAGE value="Added UUID generate when user account created" />
@@ -423,6 +434,7 @@
     <MESSAGE value="added CRUD API for comment" />
     <MESSAGE value="updated nest json for post read API" />
     <MESSAGE value="debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug" />
+    <MESSAGE value="debug sql output" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug sql output" />
   </component>
 </project>

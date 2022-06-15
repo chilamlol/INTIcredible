@@ -20,15 +20,13 @@ def add_post():
         _text = _json['text']
         _file = _json['file']
         _image = _json['image']
-        _approval = _json['approval']
-        _status = _json['status']
         _userId = _json['userId']
 
         # save edits
         sql = " INSERT INTO tbl_post(text, file, image, approval, " \
-              " createdDate, modifiedDate, status, userId) VALUES(%s, %s, %s, %s, NOW(), NOW(), %s, %s)"
+              " createdDate, modifiedDate, status, userId) VALUES(%s, %s, %s, 0, NOW(), NOW(), 'false', %s)"
 
-        data = (_text, _file, _image, _approval, _status, _userId)
+        data = (_text, _file, _image, _userId)
 
         if createRecord(sql, data) > 0:
             resp = jsonify(message='Post added successfully')
@@ -148,6 +146,34 @@ def update_post(postId):
 
         if updateRecord(sql, data) > 0:
             resp = jsonify(message='Post updated successfully!')
+            resp.status_code = 200
+            return resp
+
+        # Return error if missing parameter
+        return not_found()
+
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
+
+# Approve post
+@app.route('/post/approve/<int:postId>', methods=['PUT'])
+# @token_required
+def update_post(postId):
+    try:
+        _json = request.json
+
+        _approval = _json['approval']
+
+        # save edits
+        sql = " UPDATE tbl_post SET approval=%s, " \
+              " modifiedDate=NOW() WHERE postId=%s"
+
+        data = (_approval, postId)
+
+        if updateRecord(sql, data) > 0:
+            resp = jsonify(message='Post successfully approved')
             resp.status_code = 200
             return resp
 
