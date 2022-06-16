@@ -165,7 +165,7 @@ def show_all_post_nested():
               " FROM tbl_like " \
               " GROUP BY postId" \
               " ) tl ON tp.postId = tl.postId " \
-              " WHERE tp.status = 1 AND tp.approved = 1 " \
+              " WHERE tp.status = 1 AND tp.approval = 1 " \
               " ORDER BY tp.createdDate desc"
 
         row = readNestedRecord(sql)
