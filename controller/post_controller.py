@@ -150,7 +150,7 @@ def show_all_post_nested():
         sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
               " 'image', tp.image, 'approval', tp.approval, 'createdDate', DATE_FORMAT(tp.createdDate, '%Y-%m-%d %T'), " \
               " 'modifiedDate', DATE_FORMAT(tp.modifiedDate, '%Y-%m-%d %T'), " \
-              " 'status', tp.status, 'userId', 'likeCount', COUNT(tl.postId), tp.userId, 'comment', tc.commentList)) " \
+              " 'status', tp.status, 'userId', 'likeCount', likeCount, tp.userId, 'comment', tc.commentList)) " \
               " FROM " \
               " tbl_post tp " \
               " LEFT JOIN ( " \
@@ -159,7 +159,14 @@ def show_all_post_nested():
               " 'modifiedDate', DATE_FORMAT(modifiedDate, '%Y-%m-%d %T'), 'status', status, 'userId', userId)) commentList " \
               " FROM tbl_comment" \
               " GROUP BY postId" \
-              " ) tc ON tp.postId = tc.postId LEFT JOIN tbl_like tl ON tp.postId = tl.postId WHERE tp.status = 1 AND tp.approved = 1 ORDER BY tp.createdDate desc"
+              " ) tc ON tp.postId = tc.postId " \
+              " LEFT JOIN ( " \
+              " SELECT postId, count(userId) AS 'likeCount' " \
+              " FROM tbl_like " \
+              " GROUP BY postId" \
+              " ) tl ON tp.postId = tl.postId " \
+              " WHERE tp.status = 1 AND tp.approved = 1 " \
+              " ORDER BY tp.createdDate desc"
 
         row = readNestedRecord(sql)
 
