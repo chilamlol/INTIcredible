@@ -150,7 +150,7 @@ def show_all_post_nested():
         sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
               " 'image', tp.image, 'approval', tp.approval, 'createdDate', DATE_FORMAT(tp.createdDate, '%Y-%m-%d %T'), " \
               " 'modifiedDate', DATE_FORMAT(tp.modifiedDate, '%Y-%m-%d %T'), " \
-              " 'status', tp.status, 'userId', 'likeCount', likeCount, tp.userId, 'comment', tc.commentList)) " \
+              " 'status', tp.status, 'userId', tp.userId, 'likeCount', likeCount, 'comment', tc.commentList)) " \
               " FROM " \
               " tbl_post tp " \
               " LEFT JOIN ( " \
@@ -166,9 +166,12 @@ def show_all_post_nested():
               " GROUP BY postId" \
               " ) tl ON tp.postId = tl.postId " \
               " WHERE tp.status = 1 AND tp.approval = 1 " \
-              " ORDER BY tp.createdDate desc"
+              " ORDER BY tp.createdDate desc "
 
         row = readNestedRecord(sql)
+
+        if row[0] is None:
+            return not_found()
 
         # Convert list to string to remove unwanted characters
         res = str(row)[2:-3].replace("\\", "")

@@ -25,6 +25,10 @@ def add_like():
             resp = jsonify(message='Like added successfully')
             resp.status_code = 201
             return resp
+        else:
+            resp = jsonsify(message='User already liked')
+            resp.status_code = 400
+            return resp
 
         # Return error if missing parameter
         return bad_request()
