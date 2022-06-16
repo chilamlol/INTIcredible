@@ -24,7 +24,7 @@ def add_post():
 
         # save edits
         sql = " INSERT INTO tbl_post(text, file, image, approval, " \
-              " createdDate, modifiedDate, status, userId) VALUES(%s, %s, %s, 0, NOW(), NOW(), 'true', %s)"
+              " createdDate, modifiedDate, status, userId) VALUES(%s, %s, %s, 0, NOW(), NOW(), 1, %s)"
 
         data = (_text, _file, _image, _userId)
 
@@ -42,15 +42,22 @@ def add_post():
 
 
 # list all post active and approved
-@app.route('/post/<int:isApproved>')
+@app.route('/post/<string:approval>')
 # @token_required
-def show_all_post(isApproved):
+def show_all_post(approval):
     try:
         sql = " SELECT * FROM tbl_post WHERE status = 1 "
 
-        # if isApproved = 1, display active and approved post
-        if isApproved == 1:
-            sql += " AND approval = 1"
+        # Approval have 3 condition, if input anything else return all
+        if approval == "rejected":
+            sql += " AND approval = 2 "
+        elif approval == "pending":
+            sql += " AND approval = 0 "
+        elif approval == "approved":
+            sql += " AND approval = 1 "
+
+        # 1st come 1st serve approval
+        sql += " ORDER BY createdDate asc"
 
         rows = readAllRecord(sql)
 
@@ -70,6 +77,7 @@ def show_all_post(isApproved):
         return internal_server_error(e)
 
 
+"""
 # list specific active and approved post
 @app.route('/post/<int:postId>')
 # @token_required
@@ -92,12 +100,51 @@ def show_post(postId):
     except Exception as e:
         print(e)
         return internal_server_error(e)
+"""
+
+
+# list pending or rejected post by user
+@app.route('/post/<string:approval>/<int:userId>')
+# @token_required
+def show_post_by_user(approval, userId):
+    try:
+        sql = " SELECT * FROM tbl_post WHERE userId=%s AND status = 1 "
+
+        # Approval have 3 condition, if input anything else return all
+        if approval == "rejected":
+            sql += " AND approval = 2 "
+        elif approval == "pending":
+            sql += " AND approval = 0 "
+        elif approval == "approved":
+            sql += " AND approval = 1 "
+
+        sql += " ORDER BY createdDate DESC "
+
+        rows = readAllRecord(sql, userId)
+
+        if not rows:
+            return not_found()
+
+        result = []
+
+        # Convert date time format for output
+        for row in rows:
+            row['createdDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
+            result.append(row)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
 
 
 # list post and their comment
-@app.route('/post/nested/<int:isApproved>')
+@app.route('/post/nested')
 # @token_required
-def show_all_post_nested(isApproved):
+def show_all_post_nested():
     try:
         # Requires MySQL 5.7 and above
         sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
@@ -112,11 +159,7 @@ def show_all_post_nested(isApproved):
               " 'modifiedDate', DATE_FORMAT(modifiedDate, '%Y-%m-%d %T'), 'status', status, 'userId', userId)) commentList " \
               " FROM tbl_comment" \
               " GROUP BY postId" \
-              " ) tc ON tp.postId = tc.postId WHERE tp.status = 1 "
-
-        # if isApproved = 1, display active and approved post
-        if isApproved == 1:
-            sql += " AND tp.approval = 1 "
+              " ) tc ON tp.postId = tc.postId WHERE tp.status = 1 AND tp.approved = 1 ORDER BY tp.createdDate desc"
 
         row = readNestedRecord(sql)
 
@@ -143,18 +186,15 @@ def update_post(postId):
         _text = _json['text']
         _file = _json['file']
         _image = _json['image']
-        _approval = _json['approval']
-        _status = _json['status']
-        _userId = _json['userId']
 
         # save edits
-        sql = " UPDATE tbl_post SET text=%s, file=%s, image=%s, approval=%s, " \
-              " modifiedDate=NOW(), status=%s, userId=%s WHERE postId=%s"
+        sql = " UPDATE tbl_post SET text=%s, file=%s, image=%s, " \
+              " modifiedDate=NOW() WHERE postId=%s"
 
-        data = (_text, _file, _image, _approval, _status, _userId, postId)
+        data = (_text, _file, _image, postId)
 
         if updateRecord(sql, data) > 0:
-            resp = jsonify(message='Post updated successfully!')
+            resp = jsonify(message='Post updated successfully')
             resp.status_code = 200
             return resp
 
@@ -167,13 +207,19 @@ def update_post(postId):
 
 
 # Approve post
-@app.route('/post/approve/<int:postId>', methods=['PUT'])
+@app.route('/post/<string:approval>/<int:postId>', methods=['PUT'])
 # @token_required
-def approve_post(postId):
+def approve_post(approval, postId):
     try:
         _json = request.json
 
-        _approval = _json['approval']
+        if approval == "approve":
+            _approval = 1
+        elif approval == "reject":
+            _approval = 2
+        else:
+            # unknown input
+            return bad_request()
 
         # save edits
         sql = " UPDATE tbl_post SET approval=%s, " \

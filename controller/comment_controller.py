@@ -96,15 +96,11 @@ def update_comment(commentId):
         _json = request.json
 
         _text = _json['text']
-        _status = _json['status']
-        _userId = _json['userId']
-        _postId = _json['postId']
 
         # save edits
-        sql = " UPDATE tbl_comment SET text=%s, modifiedDate=NOW(), " \
-              " status=%s, userId=%s, postId=%s WHERE commentId=%s"
+        sql = " UPDATE tbl_comment SET text=%s, modifiedDate=NOW() WHERE commentId=%s"
 
-        data = (_text, _status, _userId, _postId, commentId)
+        data = (_text, commentId)
 
         if updateRecord(sql, data) > 0:
             resp = jsonify(message='Comment updated successfully!')

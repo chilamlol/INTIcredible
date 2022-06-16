@@ -42,15 +42,17 @@ def add_notification():
 
 # list all active notification
 # pushed or not pushed notification depends on input
-@app.route('/notification/<int:isPushed>')
-# @is_admin
+@app.route('/notification/<string:isPushed>')
+# @token_required
 def show_all_notification(isPushed):
     try:
         sql = " SELECT * FROM tbl_notification WHERE status = 1 "
 
         # if isPushed = 1, display only active and pushed notification
-        if isPushed == 1:
-            sql += " AND push = 1"
+        if isPushed == "pushed":
+            sql += " AND push = 1 "
+        elif isPushed == "notPushed":
+            sql += " AND push = 0 "
 
         rows = readAllRecord(sql)
 
@@ -98,7 +100,7 @@ def show_notification(notificationId):
 # Update notification
 @app.route('/notification/update/<int:notificationId>', methods=['PUT'])
 # @is_admin
-def update_comment(commentId):
+def update_notification(notificationId):
     try:
         _json = request.json
 
@@ -112,10 +114,10 @@ def update_comment(commentId):
         sql = " UPDATE tbl_notification SET title=%s, description=%s, " \
               " image=%s, push=%s, status=%s WHERE notificationId=%s"
 
-        data = (_text, _status, _userId, _postId, commentId)
+        data = (_title, _description, _image, _push, _status)
 
         if updateRecord(sql, data) > 0:
-            resp = jsonify(message='Notification updated successfully!')
+            resp = jsonify(message='Notification updated successfully')
             resp.status_code = 200
             return resp
 
