@@ -160,7 +160,7 @@ def update_post(postId):
 # Approve post
 @app.route('/post/approve/<int:postId>', methods=['PUT'])
 # @token_required
-def update_post(postId):
+def approve_post(postId):
     try:
         _json = request.json
 

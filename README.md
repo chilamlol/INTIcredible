@@ -1,4 +1,4 @@
-# INTIcredible
+# INTIcredibles
 
 This is the backend API for all the service in INTIcredible app and admin web portal. The API are built using Python with Flask frame work.
 
