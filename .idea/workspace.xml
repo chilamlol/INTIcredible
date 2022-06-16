@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/controller/notification_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/comment_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/comment_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/post_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/post_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +147,8 @@
       <workItem from="1655259555785" duration="63000" />
       <workItem from="1655259938349" duration="809000" />
       <workItem from="1655260775243" duration="50000" />
-      <workItem from="1655260909139" duration="10000" />
+      <workItem from="1655260909139" duration="288000" />
+      <workItem from="1655388997686" duration="2815000" />
     </task>
     <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
       <created>1642588064353</created>
@@ -406,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655260803755</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="set post status default to true">
+      <created>1655261187203</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1655261187203</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,7 +436,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added UUID generate when user account created" />
     <MESSAGE value="Refactored the code and bugfix and error handling added" />
     <MESSAGE value="Update readme.md and merge local with remote" />
     <MESSAGE value="added username in response body for login, added new controller for account activation" />
@@ -451,6 +460,7 @@
     <MESSAGE value="debug sql output" />
     <MESSAGE value="added API for post approval" />
     <MESSAGE value="edit status as default value true for comment add" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit status as default value true for comment add" />
+    <MESSAGE value="set post status default to true" />
+    <option name="LAST_COMMIT_MESSAGE" value="set post status default to true" />
   </component>
 </project>

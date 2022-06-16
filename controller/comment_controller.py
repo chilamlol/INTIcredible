@@ -22,7 +22,7 @@ def add_comment():
 
         # save edits
         sql = " INSERT INTO tbl_comment(text, status, createdDate, modifiedDate, " \
-              " userId, postId) VALUES (%s, 'true', NOW(), NOW(), %s, %s) "
+              " userId, postId) VALUES (%s, 1, NOW(), NOW(), %s, %s) "
 
         data = (_text, _userId, _postId)
 
@@ -39,12 +39,12 @@ def add_comment():
         return internal_server_error(e)
 
 
-# list all post
+# list all active comment
 @app.route('/comment')
 # @token_required
 def show_all_comment():
     try:
-        sql = "SELECT * FROM tbl_comment"
+        sql = "SELECT * FROM tbl_comment WHERE status = 1"
         rows = readAllRecord(sql)
 
         result = []
@@ -64,12 +64,12 @@ def show_all_comment():
         return internal_server_error(e)
 
 
-# list specific comment
+# list specific active comment
 @app.route('/comment/<int:commentId>')
 # @token_required
 def show_comment(commentId):
     try:
-        sql = "SELECT * FROM tbl_comment WHERE commentId=%s"
+        sql = "SELECT * FROM tbl_comment WHERE commentId=%s AND status = 1"
 
         row = readOneRecord(sql, commentId)
 
@@ -125,7 +125,7 @@ def update_comment(commentId):
 # @token_required
 def delete_comment(commentId):
     try:
-        sql = "UPDATE tbl_comment SET modifiedDate = NOW(), status = 'false' WHERE commentId=%s"
+        sql = "UPDATE tbl_comment SET modifiedDate = NOW(), status = 0 WHERE commentId=%s"
 
         if updateRecord(sql, commentId) > 0:
             resp = jsonify(message='Comment successfully inactivated')

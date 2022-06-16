@@ -41,12 +41,17 @@ def add_post():
         return internal_server_error(e)
 
 
-# list all post
-@app.route('/post')
+# list all post active and approved
+@app.route('/post/<int:isApproved>')
 # @token_required
-def show_all_post():
+def show_all_post(isApproved):
     try:
-        sql = "SELECT * FROM tbl_post"
+        sql = " SELECT * FROM tbl_post WHERE status = 1 "
+
+        # if isApproved = 1, display active and approved post
+        if isApproved == 1:
+            sql += " AND approval = 1"
+
         rows = readAllRecord(sql)
 
         result = []
@@ -65,12 +70,12 @@ def show_all_post():
         return internal_server_error(e)
 
 
-# list specific post
+# list specific active and approved post
 @app.route('/post/<int:postId>')
 # @token_required
 def show_post(postId):
     try:
-        sql = "SELECT * FROM tbl_post WHERE postId=%s"
+        sql = "SELECT * FROM tbl_post WHERE postId=%s AND status = 1"
 
         row = readOneRecord(sql, postId)
 
@@ -90,9 +95,9 @@ def show_post(postId):
 
 
 # list post and their comment
-@app.route('/post/nested')
+@app.route('/post/nested/<int:isApproved>')
 # @token_required
-def show_all_post_nested():
+def show_all_post_nested(isApproved):
     try:
         # Requires MySQL 5.7 and above
         sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
@@ -107,7 +112,11 @@ def show_all_post_nested():
               " 'modifiedDate', DATE_FORMAT(modifiedDate, '%Y-%m-%d %T'), 'status', status, 'userId', userId)) commentList " \
               " FROM tbl_comment" \
               " GROUP BY postId" \
-              " ) tc ON tp.postId = tc.postId"
+              " ) tc ON tp.postId = tc.postId WHERE tp.status = 1 "
+
+        # if isApproved = 1, display active and approved post
+        if isApproved == 1:
+            sql += " AND tp.approval = 1 "
 
         row = readNestedRecord(sql)
 
@@ -173,7 +182,7 @@ def approve_post(postId):
         data = (_approval, postId)
 
         if updateRecord(sql, data) > 0:
-            resp = jsonify(message='Post successfully approved')
+            resp = jsonify(message='Post approval successfully updated')
             resp.status_code = 200
             return resp
 
@@ -191,7 +200,7 @@ def approve_post(postId):
 # @token_required
 def delete_post(postId):
     try:
-        sql = "UPDATE tbl_post SET modifiedDate = NOW(), status = 'false' WHERE postId=%s"
+        sql = "UPDATE tbl_post SET modifiedDate = NOW(), status = 0 WHERE postId=%s"
 
         if updateRecord(sql, postId) > 0:
             resp = jsonify(message='Post successfully inactivated')
