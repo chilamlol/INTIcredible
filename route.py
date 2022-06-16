@@ -10,6 +10,7 @@ from controller.image_controller import *
 from controller.post_controller import *
 from controller.comment_controller import *
 from controller.notification_controller import *
+from controller.like_controller import *
 
 
 @app.route("/")

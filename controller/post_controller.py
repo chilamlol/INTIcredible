@@ -159,7 +159,7 @@ def show_all_post_nested():
               " 'modifiedDate', DATE_FORMAT(modifiedDate, '%Y-%m-%d %T'), 'status', status, 'userId', userId)) commentList " \
               " FROM tbl_comment" \
               " GROUP BY postId" \
-              " ) tc ON tp.postId = tc.postId LEFT JOIN tbl_like tl ON tp.postId = tl.postId WHERE tp.status = 1 AND tp.approved = 1 GROUP BY tp.postId ORDER BY tp.createdDate desc"
+              " ) tc ON tp.postId = tc.postId LEFT JOIN tbl_like tl ON tp.postId = tl.postId WHERE tp.status = 1 AND tp.approved = 1 ORDER BY tp.createdDate desc"
 
         row = readNestedRecord(sql)
 
