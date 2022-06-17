@@ -218,7 +218,7 @@ def update_post(postId):
 
 # Approve post
 @app.route('/post/<string:approval>/<int:postId>', methods=['PUT'])
-# @token_required
+# @is_admin
 def approve_post(approval, postId):
     try:
         _json = request.json
