@@ -147,7 +147,7 @@ def claim_voucher():
         # else have to get today + expiryDays
         if row['expiryType'] == 1:
             expiryDate = row['expiry']
-        expiryDate = date.today() + timedelta(days=row['expiry'])
+        expiryDate = date.today() + timedelta(days=int(row['expiry']))
 
         # Convert to mysql format
         expiryDate = expiryDate.strftime("%Y-%m-%d %H:%M:%S")
