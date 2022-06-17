@@ -52,7 +52,7 @@ def show_all_comment():
         # Convert date time format for output
         # yyyy-MM-dd HH:MM:SS
         for row in rows:
-            row['createdDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
             row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
             result.append(row)
 
@@ -77,7 +77,7 @@ def show_comment(commentId):
             return not_found()
 
         # Convert date time format for output
-        row['createdDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+        row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
         row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
 
         resp = jsonify(row)

@@ -65,7 +65,7 @@ def show_all_post(approval):
 
         # Convert date time format for output
         for row in rows:
-            row['createdDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
             row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
             result.append(row)
 
@@ -129,7 +129,7 @@ def show_post_by_user(approval, userId):
 
         # Convert date time format for output
         for row in rows:
-            row['createdDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
             row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
             result.append(row)
 
