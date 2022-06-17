@@ -145,21 +145,20 @@ def claim_voucher():
 
         # if expiryType = 1, then use expiryDate
         # else have to get today + expiryDays
-        if row['expiryType'] == 1:
+        if int(row['expiryType']) == 1:
             expiryDate = row['expiry']
-        expiryDate = date.today() + timedelta(days=int(row['expiry']))
-
-        # Convert to mysql format
-        expiryDate = expiryDate.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+            expiryDate = date.today() + timedelta(days=int(row['expiry']))
 
         # Obtain barcode
         # get integer length
         length = len(str(row['voucherLimit']))
 
         # format the number
-        temp = '{:0' + length + '}'.format(row['currentVoucherCount'])
-        barcode = row["code"] + temp
+        temp = format(row['currentVoucherCount'], '0' + str(length) + 'd')
+        barcode = row["code"] + str(temp)
 
+        # save edits
         sql = " INSERT INTO tbl_user_voucher(userId, voucherId, redeemable, barcode," \
               " expiryDate, createdDate) VALUES(%s, %s, 1, %s, %s, NOW()) "
 
@@ -171,6 +170,26 @@ def claim_voucher():
             return resp
 
         return bad_request()
+
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
+
+# Redeem Voucher
+@app.route('/voucher/redeem/<int:userVoucherId>', methods=['PUT'])
+# @token_required
+def redeem_voucher(userVoucherId):
+    try:
+        # save edits
+        sql = " UPDATE tbl_user_voucher SET redeemable = 0, modifiedDate = NOW() WHERE userVoucherId = %s"
+
+        if updateRecord(sql, userVoucherId) > 0:
+            resp = jsonify(message='Voucher redeem successfully')
+            resp.status_code = 200
+            return resp
+
+        return not_found()
 
     except Exception as e:
         print(e)
