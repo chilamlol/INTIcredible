@@ -93,8 +93,6 @@ def show_all_voucher_for_user(userId):
 # @token_required
 def list_user_claimed_voucher(voucherStatus, userId):
     try:
-        _json = request.json
-
         sql = " SELECT tv.title, tv.description, tv.image, " \
               " tm.name, tm.logo, tuv.* " \
               " FROM tbl_user_voucher tuv " \
@@ -112,7 +110,6 @@ def list_user_claimed_voucher(voucherStatus, userId):
         elif voucherStatus == "redeemed":
             sql += " AND tuv.redeemable = 0 "
 
-        print(sql)
         rows = readAllRecord(sql, userId)
 
         if not rows:
