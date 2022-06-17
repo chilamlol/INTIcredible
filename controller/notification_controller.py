@@ -108,13 +108,12 @@ def update_notification(notificationId):
         _description = _json['description']
         _image = _json['image']
         _push = _json['push']
-        _status = _json['status']
 
         # save edits
         sql = " UPDATE tbl_notification SET title=%s, description=%s, " \
-              " image=%s, push=%s, status=%s WHERE notificationId=%s"
+              " image=%s, push=%s WHERE notificationId=%s"
 
-        data = (_title, _description, _image, _push, _status)
+        data = (_title, _description, _image, _push, notificationId)
 
         if updateRecord(sql, data) > 0:
             resp = jsonify(message='Notification updated successfully')
