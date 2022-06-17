@@ -138,7 +138,7 @@ def claim_voucher():
               " ON tv.voucherId = tuv.voucherId " \
               " WHERE tv.voucherId = %s " \
               " GROUP BY tv.voucherId "
-        row = readOneRecord(sql, voucherId)
+        row = readOneRecord(sql, _voucherId)
 
         if not row:
             not_found()
