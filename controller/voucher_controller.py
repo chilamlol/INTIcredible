@@ -8,7 +8,7 @@ from datetime import timedelta, date
 
 # add voucher
 @app.route('/voucher/add', methods=['POST'])
-# @token_required
+# @is_admin
 def add_voucher():
     try:
         _json = request.json
@@ -59,6 +59,7 @@ def show_all_voucher_for_user(userId):
               " ON tm.merchantId = tv.merchantId) " \
               " WHERE tv.status = 1 " \
               " AND tm.status = 1 " \
+              " AND (NOW() BETWEEN tv.startDate AND tv.endDate) " \
               " GROUP BY tv.voucherId " \
               " HAVING COUNT(tuv.userId = %s) < tv.voucherClaimableAmount " \
               " AND COUNT(tuv.voucherId) < tv.voucherLimit;"
@@ -124,12 +125,10 @@ def list_user_claimed_voucher(voucherStatus, userId):
 
 
 # valid voucher
-@app.route('/voucher/valid/<int:voucherId>')
+@app.route('/voucher/validate/<int:voucherId>')
 #@token_required
-def valid_voucher_claim(voucherId):
+def validate_voucher_claim(voucherId):
     try:
-        _json = request.json
-
         sql = " SELECT tv.voucherLimit " \
               " FROM (tbl_voucher tv " \
               " INNER JOIN tbl_user_voucher tuv " \
@@ -204,7 +203,7 @@ def claim_voucher():
             resp.status_code = 200
             return resp
 
-        return bad_request()
+        return not_found()
 
     except Exception as e:
         print(e)

@@ -70,8 +70,8 @@ def show_merchant(merchantId):
             return not_found()
 
         # Convert date time format for output
-        row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
-        row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
+        row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+        row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
 
         resp = jsonify(row)
         resp.status_code = 200
