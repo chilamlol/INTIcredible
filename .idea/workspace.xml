@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
+    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/voucher_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/voucher_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/account_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/account_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/login_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/login_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token_verifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/token_verifier.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,14 +149,9 @@
       <workItem from="1655260775243" duration="50000" />
       <workItem from="1655260909139" duration="288000" />
       <workItem from="1655388997686" duration="10281000" />
-      <workItem from="1655462886415" duration="12930000" />
-    </task>
-    <task id="LOCAL-00006" summary="Added UUID generate when user account created">
-      <created>1643112964554</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1643112964554</updated>
+      <workItem from="1655462886415" duration="13067000" />
+      <workItem from="1655483521307" duration="416000" />
+      <workItem from="1655488346518" duration="2094000" />
     </task>
     <task id="LOCAL-00007" summary="Refactored the code and bugfix and error handling added">
       <created>1648146346087</created>
@@ -492,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655480708602</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="bug fix">
+      <created>1655481009962</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1655481009962</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
