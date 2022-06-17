@@ -95,13 +95,13 @@ def list_user_claimed_voucher(voucherStatus, userId):
     try:
         _json = request.json
 
-        sql = " SELECT tv.title, tv.description, tv.iamge, " \
+        sql = " SELECT tv.title, tv.description, tv.image, " \
               " tm.name, tm.logo, tuv.* " \
               " FROM tbl_user_voucher tuv " \
               " LEFT JOIN tbl_voucher tv " \
               " ON tuv.voucherId = tv.voucherId " \
               " LEFT JOIN tbl_merchant tm " \
-              " ON tv.merchantId = tm.merchantId" \
+              " ON tv.merchantId = tm.merchantId " \
               " WHERE tuv.userId = %s " \
 
         if voucherStatus == "active":
@@ -112,6 +112,7 @@ def list_user_claimed_voucher(voucherStatus, userId):
         elif voucherStatus == "redeemed":
             sql += " AND tuv.redeemable = 0 "
 
+        print(sql)
         rows = readAllRecord(sql, userId)
 
         if not rows:
