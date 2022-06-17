@@ -49,7 +49,7 @@ def add_voucher():
 # list all claimable voucher for the user
 @app.route('/voucher/<int:userId>')
 # @token_required
-def show_all_voucher_for_user():
+def show_all_voucher_for_user(userId):
     try:
         sql = " SELECT tv.*, tm.name AS 'merchantName', tm.logo AS 'merchantLogo' " \
               " FROM (tbl_voucher tv " \
