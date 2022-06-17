@@ -61,6 +61,9 @@ def show_all_post(approval):
 
         rows = readAllRecord(sql)
 
+        if not rows:
+            return not_found()
+
         result = []
 
         # Convert date time format for output

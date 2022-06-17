@@ -38,7 +38,19 @@ def show_all_merchant():
     try:
         sql = "SELECT * FROM tbl_merchant WHERE status = 1"
         rows = readAllRecord(sql)
-        resp = jsonify(rows)
+
+        if not rows:
+            return not_found()
+
+        result = []
+
+        # Convert date time format for output
+        for row in rows:
+            row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
+            result.append(row)
+
+        resp = jsonify(result)
         resp.status_code = 200
         return resp
     except Exception as e:
@@ -53,8 +65,13 @@ def show_merchant(merchantId):
     try:
         sql = "SELECT * FROM tbl_merchant WHERE merchantId=%s AND status = 1"
         row = readOneRecord(sql, merchantId)
+
         if not row:
             return not_found()
+
+        # Convert date time format for output
+        row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+        row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
 
         resp = jsonify(row)
         resp.status_code = 200
