@@ -95,7 +95,7 @@ def valid_voucher_claim(voucherId):
     try:
         _json = request.json
 
-        sql = " SELECT tv.voucherId " \
+        sql = " SELECT tv.voucherLimit " \
               " FROM (tbl_voucher tv " \
               " INNER JOIN tbl_user_voucher tuv " \
               " ON tv.voucherId = tuv.voucherId) " \
