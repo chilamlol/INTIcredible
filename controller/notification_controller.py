@@ -135,7 +135,7 @@ def push_notification(notificationId):
     try:
 
         # save edits
-        sql = " UPDATE tbl_post SET push = 1, " \
+        sql = " UPDATE tbl_notification SET push = 1, " \
               " modifiedDate=NOW() WHERE notificationId=%s"
 
         if updateRecord(sql, notificationId) > 0:
