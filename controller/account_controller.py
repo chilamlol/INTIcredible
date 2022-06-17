@@ -25,8 +25,8 @@ def activate_user_account(userId):
 
 
 # Create Admin
-@app.route("/account/add/admin", methods=['POST'])
-@is_super_admin
+@app.route("/account/add-admin", methods=['POST'])
+#@is_super_admin
 def add_admin():
     try:
         _json = request.json
