@@ -88,6 +88,43 @@ def show_all_voucher_for_user(userId):
         return internal_server_error(e)
 
 
+# retrieve user voucher
+@app.route('/voucher/<string:voucherStatus>/<int:userId>')
+# @token_required
+def list_user_claimed_voucher(voucherStatus, userId):
+    try:
+        _json = request.json
+
+        sql = " SELECT tv.title, tv.description, tv.iamge, " \
+              " tm.name, tm.logo, tuv.* " \
+              " FROM tbl_user_voucher tuv " \
+              " LEFT JOIN tbl_voucher tv " \
+              " ON tuv.voucherId = tv.voucherId " \
+              " LEFT JOIN tbl_merchant tm " \
+              " ON tv.merchantId = tm.merchantId" \
+              " WHERE tuv.userId = %s " \
+
+        if voucherStatus == "active":
+            sql += " AND tuv.redeemable = 1 " \
+                   " AND NOW() < tuv.expiryDate "
+        elif voucherStatus == "expired":
+            sql += " AND NOW() > tuv.expiryDate "
+        elif voucherStatus == "redeemed":
+            sql += " AND tuv.redeemable = 0 "
+
+        rows = readAllRecord(sql, userId)
+
+        if not rows:
+            not_found()
+
+        resp = jsonify(rows)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
+
 # valid voucher
 @app.route('/voucher/valid/<int:voucherId>')
 #@token_required
