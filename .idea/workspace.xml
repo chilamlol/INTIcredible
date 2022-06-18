@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="" />
+    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="bug fix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/account_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/account_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/login_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/login_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token_verifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/token_verifier.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +38,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -40,6 +46,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="advanced.settings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -133,49 +140,18 @@
       <workItem from="1648390434445" duration="653000" />
       <workItem from="1649515956350" duration="371000" />
       <workItem from="1654947729331" duration="573000" />
-      <workItem from="1654953497067" duration="3443000" />
-    </task>
-    <task id="LOCAL-00001" summary="Changed naming conversion and refactored some code">
-      <created>1642588064353</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1642588064353</updated>
-    </task>
-    <task id="LOCAL-00002" summary="added new API controller for FAQ and FAQ category.">
-      <created>1642588112022</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1642588112037</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Changed naming conversion">
-      <created>1642588173436</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1642588173436</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Added import to route for API call">
-      <created>1642589736342</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1642589736342</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Added secret key for encryption">
-      <created>1643112924184</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1643112924184</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Added UUID generate when user account created">
-      <created>1643112964554</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1643112964554</updated>
+      <workItem from="1654953497067" duration="3487000" />
+      <workItem from="1655132927569" duration="4886000" />
+      <workItem from="1655139673783" duration="968000" />
+      <workItem from="1655189870977" duration="6914000" />
+      <workItem from="1655259555785" duration="63000" />
+      <workItem from="1655259938349" duration="809000" />
+      <workItem from="1655260775243" duration="50000" />
+      <workItem from="1655260909139" duration="288000" />
+      <workItem from="1655388997686" duration="10281000" />
+      <workItem from="1655462886415" duration="13067000" />
+      <workItem from="1655483521307" duration="416000" />
+      <workItem from="1655488346518" duration="2094000" />
     </task>
     <task id="LOCAL-00007" summary="Refactored the code and bugfix and error handling added">
       <created>1648146346087</created>
@@ -296,7 +272,231 @@
       <option name="project" value="LOCAL" />
       <updated>1654956869054</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="added library">
+      <created>1654956995593</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1654956995593</updated>
+    </task>
+    <task id="LOCAL-00025" summary="added post API">
+      <created>1655138853047</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1655138853047</updated>
+    </task>
+    <task id="LOCAL-00026" summary="edit message">
+      <created>1655140475478</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1655140475479</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added requirements.txt">
+      <created>1655140607103</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1655140607103</updated>
+    </task>
+    <task id="LOCAL-00028" summary="added db execution for nested json">
+      <created>1655192825841</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1655192825841</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added CRUD API for comment">
+      <created>1655192852293</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1655192852293</updated>
+    </task>
+    <task id="LOCAL-00030" summary="updated nest json for post read API">
+      <created>1655192867770</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1655192867770</updated>
+    </task>
+    <task id="LOCAL-00031" summary="debug">
+      <created>1655193391901</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1655193391901</updated>
+    </task>
+    <task id="LOCAL-00032" summary="debug">
+      <created>1655193643067</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1655193643067</updated>
+    </task>
+    <task id="LOCAL-00033" summary="debug">
+      <created>1655194445135</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1655194445135</updated>
+    </task>
+    <task id="LOCAL-00034" summary="debug">
+      <created>1655195855499</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1655195855499</updated>
+    </task>
+    <task id="LOCAL-00035" summary="debug sql output">
+      <created>1655196176426</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1655196176426</updated>
+    </task>
+    <task id="LOCAL-00036" summary="added API for post approval">
+      <created>1655260598202</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1655260598202</updated>
+    </task>
+    <task id="LOCAL-00037" summary="edit status as default value true for comment add">
+      <created>1655260803755</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1655260803755</updated>
+    </task>
+    <task id="LOCAL-00038" summary="set post status default to true">
+      <created>1655261187203</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1655261187203</updated>
+    </task>
+    <task id="LOCAL-00039" summary="added notification API">
+      <created>1655392913376</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1655392913376</updated>
+    </task>
+    <task id="LOCAL-00040" summary="edit function">
+      <created>1655396689807</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1655396689807</updated>
+    </task>
+    <task id="LOCAL-00041" summary="added Like count">
+      <created>1655397469624</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1655397469624</updated>
+    </task>
+    <task id="LOCAL-00042" summary="bugfix">
+      <created>1655397745360</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1655397745360</updated>
+    </task>
+    <task id="LOCAL-00043" summary="added like count">
+      <created>1655398556525</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1655398556525</updated>
+    </task>
+    <task id="LOCAL-00044" summary="bugfix">
+      <created>1655398677867</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1655398677867</updated>
+    </task>
+    <task id="LOCAL-00045" summary="added like count">
+      <created>1655399626747</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1655399626747</updated>
+    </task>
+    <task id="LOCAL-00046" summary="added voucherAPI">
+      <created>1655476961969</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1655476961969</updated>
+    </task>
+    <task id="LOCAL-00047" summary="bugfix">
+      <created>1655477055056</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1655477055056</updated>
+    </task>
+    <task id="LOCAL-00048" summary="added new route">
+      <created>1655477091276</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1655477091276</updated>
+    </task>
+    <task id="LOCAL-00049" summary="bugfix">
+      <created>1655477587183</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1655477587183</updated>
+    </task>
+    <task id="LOCAL-00050" summary="bugfix">
+      <created>1655477717945</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1655477717946</updated>
+    </task>
+    <task id="LOCAL-00051" summary="bugfix">
+      <created>1655477796205</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1655477796205</updated>
+    </task>
+    <task id="LOCAL-00052" summary="added voucher redemption">
+      <created>1655479051014</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1655479051014</updated>
+    </task>
+    <task id="LOCAL-00053" summary="added user wallet">
+      <created>1655480276417</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1655480276417</updated>
+    </task>
+    <task id="LOCAL-00054" summary="bug fix">
+      <created>1655480708602</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1655480708602</updated>
+    </task>
+    <task id="LOCAL-00055" summary="bug fix">
+      <created>1655481009962</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1655481009962</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,26 +515,32 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changed naming conversion and refactored some code" />
-    <MESSAGE value="added new API controller for FAQ and FAQ category." />
-    <MESSAGE value="Changed naming conversion" />
-    <MESSAGE value="Added import to route for API call" />
-    <MESSAGE value="Added secret key for encryption" />
-    <MESSAGE value="Added UUID generate when user account created" />
-    <MESSAGE value="Refactored the code and bugfix and error handling added" />
-    <MESSAGE value="Update readme.md and merge local with remote" />
-    <MESSAGE value="added username in response body for login, added new controller for account activation" />
-    <MESSAGE value="added new route in route.py for account_controller.py" />
-    <MESSAGE value="edit on error handling" />
-    <MESSAGE value="added new route for account info query" />
-    <MESSAGE value="edit error message" />
-    <MESSAGE value="added new API for upcoming event" />
-    <MESSAGE value="remove unwanted data" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="added JWT testing" />
     <MESSAGE value="missing library" />
-    <MESSAGE value="bug fix" />
     <MESSAGE value="added JWT" />
     <MESSAGE value="added library" />
-    <option name="LAST_COMMIT_MESSAGE" value="added library" />
+    <MESSAGE value="added post API" />
+    <MESSAGE value="edit message" />
+    <MESSAGE value="added requirements.txt" />
+    <MESSAGE value="added db execution for nested json" />
+    <MESSAGE value="added CRUD API for comment" />
+    <MESSAGE value="updated nest json for post read API" />
+    <MESSAGE value="debug" />
+    <MESSAGE value="debug sql output" />
+    <MESSAGE value="added API for post approval" />
+    <MESSAGE value="edit status as default value true for comment add" />
+    <MESSAGE value="set post status default to true" />
+    <MESSAGE value="added notification API" />
+    <MESSAGE value="edit function" />
+    <MESSAGE value="added Like count" />
+    <MESSAGE value="added like count" />
+    <MESSAGE value="added voucherAPI" />
+    <MESSAGE value="added new route" />
+    <MESSAGE value="bugfix" />
+    <MESSAGE value="added voucher redemption" />
+    <MESSAGE value="added user wallet" />
+    <MESSAGE value="bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
   </component>
 </project>

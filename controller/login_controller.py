@@ -26,6 +26,7 @@ def extractOnlyInteger(s):
 def md5Hash(s):
     return hashlib.md5(s.encode()).hexdigest()
 
+
 # Generate UUID for user
 def generateUUID():
     return uuid.uuid4()
@@ -75,8 +76,8 @@ def verifyUser():
 
                     # Compare password with user entered password
                     if hashedPassword == _password:
-                        sql = "INSERT INTO tbl_user (username, password, alumniId, activationStatus, GUID) VALUES (%s, %s, %s, %s, %s)"
-                        data = (row['studentId'], _password, row['alumniId'], 0, generateUUID())
+                        sql = "INSERT INTO tbl_user (username, password, alumniId, activationStatus, GUID, userRoleId) VALUES (%s, %s, %s, %s, %s,%s)"
+                        data = (row['studentId'], _password, row['alumniId'], 0, generateUUID(), 1)
                         conn = mysql.connect()
                         cursor = conn.cursor()
                         cursor.execute(sql, data)

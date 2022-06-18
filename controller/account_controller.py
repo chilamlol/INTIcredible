@@ -2,6 +2,8 @@ from app import app
 from flask import jsonify, request
 from database.db_execution import *
 from error_handler import *
+from token_verifier import *
+from controller.login_controller import generateUUID
 
 
 # Initial activate user account
@@ -15,6 +17,58 @@ def activate_user_account(userId):
             resp.status_code = 200
             return resp
 
+        return not_found()
+
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
+
+# Create Admin
+@app.route("/account/add-admin", methods=['POST'])
+#@is_super_admin
+def add_admin():
+    try:
+        _json = request.json
+
+        _username = _json['username']
+        _password = _json['password']
+
+        sql = " INSERT INTO tbl_user(username, password, activationStatus, GUID, " \
+              " userRoleId) VALUES (%s, %s, 30, %s, 3) "
+        data = (_username, _password, generateUUID())
+
+        if createRecord(sql, data) > 0:
+            resp = jsonify(message='Admin added successfully')
+            resp.status_code = 201
+            return resp
+
+        # unsuccessful to add admin
+        return bad_request()
+
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
+
+# help Admin reset password
+@app.route("/account/admin/reset-password/<string:username>", methods=['PUT'])
+@is_super_admin
+def change_admin_password(username):
+    try:
+        _json = request.json
+
+        _password = _json['password']
+
+        sql = " UPDATE tbl_user SET password = %s WHERE username = %s AND userRoleId IN (2, 3)"
+        data = (_password, username)
+
+        if updateRecord(sql, data) > 0:
+            resp = jsonify(message='Admin password updated successfully')
+            resp.status_code = 200
+            return resp
+
+        # unsuccessful to add admin
         return not_found()
 
     except Exception as e:
@@ -77,7 +131,6 @@ def update_user_profile(userId):
     except Exception as e:
         print(e)
         return internal_server_error(e)
-
 
 
 # get userId and email by username

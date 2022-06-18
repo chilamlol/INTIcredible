@@ -17,6 +17,21 @@ def readOneRecord(sql, parameter):
         conn.close()
 
 
+def readNestedRecord(sql):
+    conn = None
+    cursor = None
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        return cursor.fetchone()
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+
 def createRecord(sql, data):
     conn = None
     cursor = None

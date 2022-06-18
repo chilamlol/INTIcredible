@@ -51,6 +51,9 @@ def show_all_event():
         sql = "SELECT * FROM tbl_event"
         rows = readAllRecord(sql)
 
+        if not rows:
+            return not_found()
+
         result = []
 
         # Convert date time format for output
@@ -87,6 +90,9 @@ def show_all_upcoming_event(day):
 
         rows = readAllRecord(sql, day)
 
+        if not rows:
+            return not_found()
+
         result = []
 
         # Convert date time format for output
@@ -94,9 +100,6 @@ def show_all_upcoming_event(day):
             row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
             row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
             result.append(row)
-
-        if not result:
-            return not_found()
 
         resp = jsonify(result)
         resp.status_code = 200
