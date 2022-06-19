@@ -81,11 +81,26 @@ def change_admin_password(username):
 def reset_user_password(userId):
     try:
         _json = request.json
+
         _password = _json['password']
+
         if _password and request.method == 'PUT':
 
-            sql = "UPDATE tbl_user SET password=%s, activationStatus= CASE WHEN activationStatus = 0 THEN 10 ELSE activationStatus END WHERE userId=%s"
+            # Check if password no changes
+            sql = " SELECT * FROM tbl_user WHERE password = %s AND  userId = %s "
             data = (_password, userId)
+
+            row = readOneRecord(sql, data)
+
+            # if return row, then password is the same
+            if row:
+                resp = jsonify(message = 'Password remain unchange')
+                resp.status_code = 202
+                return resp
+
+            # Update data
+            sql = " UPDATE tbl_user SET password=%s, activationStatus= CASE WHEN activationStatus = 0 THEN 10 ELSE activationStatus END WHERE userId=%s "
+
 
             # if update successful return code 200
             if updateRecord(sql, data) > 0:

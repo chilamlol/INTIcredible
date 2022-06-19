@@ -124,7 +124,7 @@ def list_user_claimed_voucher(voucherStatus, userId):
         return internal_server_error(e)
 
 
-# valid voucher
+# validate voucher
 @app.route('/voucher/validate/<int:voucherId>')
 #@token_required
 def validate_voucher_claim(voucherId):
