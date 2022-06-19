@@ -4,8 +4,7 @@
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="bug fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/account_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/account_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/login_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/login_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token_verifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/token_verifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/event_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/event_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +151,7 @@
       <workItem from="1655462886415" duration="13067000" />
       <workItem from="1655483521307" duration="416000" />
       <workItem from="1655488346518" duration="2094000" />
+      <workItem from="1655649494973" duration="5361000" />
     </task>
     <task id="LOCAL-00007" summary="Refactored the code and bugfix and error handling added">
       <created>1648146346087</created>
