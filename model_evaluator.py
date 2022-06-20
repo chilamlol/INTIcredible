@@ -1,7 +1,6 @@
 import pandas as pd
 import random
 
-
 # Top-N accuracy metrics consts
 EVAL_RANDOM_SAMPLE_NON_INTERACTED_ITEMS = 100
 
@@ -102,6 +101,9 @@ class ModelEvaluator:
         global_recall_at_10 = detailed_results_df['hits@10_count'].sum() / float(
             detailed_results_df['interacted_count'].sum())
 
+        # The Top-N accuracy metric choosen was Recall@N which evaluates whether
+        # the interacted item is among the top N items (hit)
+        # in the ranked list of 101 recommendations for a user.
         global_metrics = {'modelName': model.get_model_name(),
                           'recall@5': global_recall_at_5,
                           'recall@10': global_recall_at_10}
