@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/model_evaluator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/event_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/event_controller.py" afterDir="false" />
     </list>
@@ -153,14 +152,7 @@
       <workItem from="1655488346518" duration="2094000" />
       <workItem from="1655649494973" duration="10593000" />
       <workItem from="1655700824066" duration="13000" />
-      <workItem from="1655722864887" duration="10474000" />
-    </task>
-    <task id="LOCAL-00010" summary="added new route in route.py for account_controller.py">
-      <created>1648146780919</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1648146780919</updated>
+      <workItem from="1655722864887" duration="13806000" />
     </task>
     <task id="LOCAL-00011" summary="edit on error handling">
       <created>1648186098949</created>
@@ -498,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655663154098</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="added machine learning">
+      <created>1655736108972</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1655736108973</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +517,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added JWT" />
     <MESSAGE value="added library" />
     <MESSAGE value="added post API" />
     <MESSAGE value="edit message" />
@@ -543,6 +541,7 @@
     <MESSAGE value="bug fix" />
     <MESSAGE value="added machine learning on event" />
     <MESSAGE value="updated requirements.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated requirements.txt" />
+    <MESSAGE value="added machine learning" />
+    <option name="LAST_COMMIT_MESSAGE" value="added machine learning" />
   </component>
 </project>

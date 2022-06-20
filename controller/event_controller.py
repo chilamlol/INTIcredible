@@ -183,7 +183,8 @@ def update_event(eventId):
         _status = _json['status']
 
         # save edits
-        sql = "UPDATE tbl_event SET name=%s, description=%s, image=%s, registerLink=%s, startDate=%s, endDate=%s, status=%s WHERE eventId=%s"
+        sql = " UPDATE tbl_event SET name=%s, description=%s, image=%s, " \
+              " registerLink=%s, startDate=%s, endDate=%s, status=%s WHERE eventId=%s "
 
         data = (_name, _description, _image, _registerLink, _startDate, _endDate, _status, eventId)
 
@@ -308,6 +309,37 @@ def generate_dummy_event_for_event_activity(amount):
 
     resp = jsonify(message='Dummy data created')
     return resp
+
+
+# list popular events sorted
+@app.route('/event/popular')
+#@token_required
+def show_all_popular_event():
+    try:
+        sql = " SELECT DISTINCT te.*, tes.eventStrength FROM tbl_event te JOIN tbl_event_strength tes " \
+              " ON te.eventId = tes.eventId WHERE te.status = 1 AND DATEDIFF(NOW(), te.startDate) <= 0 " \
+              " ORDER BY tes.eventStrength DESC, tes.createdDate DESC LIMIT 10"
+        rows = readAllRecord(sql)
+
+        print(rows)
+
+        if not rows:
+            return not_found()
+
+        result = []
+
+        # Convert date time format for output
+        for row in rows:
+            row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
+            result.append(row)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
 
 
 # Event recommender
