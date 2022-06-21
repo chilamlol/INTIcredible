@@ -384,8 +384,8 @@ def recommender_with_collaborative_filtering():
         users_interactions_count_df = interactions_df.groupby(['userId', 'eventId']).size().groupby('userId').size()
 
         # Get user with at least 5 interactions
-        users_with_enough_interactions_df = users_interactions_count_df[users_interactions_count_df >= 5].reset_index()[
-            ['userId']]
+        users_with_enough_interactions_df = \
+            users_interactions_count_df[users_interactions_count_df >= 5].reset_index()[['userId']]
 
         # Get total interactions of users with at least 5 interactions
         interactions_from_selected_users_df = interactions_df.merge(users_with_enough_interactions_df,
@@ -399,7 +399,7 @@ def recommender_with_collaborative_filtering():
             .apply(smooth_user_preference).reset_index()
 
         # Evaluation
-        # Train the model, the ratio is 80:20 (train:test)
+        # split the dataset, the ratio is 80:20 (train:test)
         interactions_train_df, interactions_test_df = train_test_split(interactions_full_df,
                                                                        stratify=interactions_full_df['userId'],
                                                                        test_size=0.20,
@@ -446,12 +446,12 @@ def recommender_with_collaborative_filtering():
                                          event_df)
 
         # Evaluating Popularity recommendation model
-        pop_global_metrics, pop_detailed_results_df = model_evaluator.evaluate_model(popularity_model)
+        pop_global_metrics, pop_detailed_results_df, userProcessed = model_evaluator.evaluate_model(popularity_model)
 
         pop_detailed_results_df.to_csv('static/collaborative_filtering_result.csv')
 
         # response code 200
-        resp = jsonify(message='Evaluation completed', globalMetric=pop_global_metrics)
+        resp = jsonify(message='Evaluation completed', globalMetric=pop_global_metrics, userProcessed=userProcessed)
 
         return resp
 

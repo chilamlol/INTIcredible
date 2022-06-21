@@ -2,7 +2,7 @@ import pandas as pd
 import random
 
 # Top-N accuracy metrics consts
-EVAL_RANDOM_SAMPLE_NON_INTERACTED_ITEMS = 100
+EVAL_RANDOM_SAMPLE_NON_INTERACTED_ITEMS = 50
 
 
 def get_items_interacted(user_id, interactions_df):
@@ -88,7 +88,7 @@ class ModelEvaluator:
 
     def evaluate_model(self, model):
         user_metrics_list = []
-        for idx, userId in enumerate(list(self.interactions_test_indexed_df.index.unique().values)):
+        for userProcessed, userId in enumerate(list(self.interactions_test_indexed_df.index.unique().values)):
             user_metrics_dict = self.evaluate_model_for_user(model, userId)
             user_metrics_dict['_user_id'] = userId
             user_metrics_list.append(user_metrics_dict)
@@ -107,7 +107,7 @@ class ModelEvaluator:
         global_metrics = {'modelName': model.get_model_name(),
                           'recall@5': global_recall_at_5,
                           'recall@10': global_recall_at_10}
-        return global_metrics, detailed_results_df
+        return global_metrics, detailed_results_df, userProcessed
 
 
 class PopularityRecommender:

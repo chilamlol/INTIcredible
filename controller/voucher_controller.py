@@ -189,8 +189,8 @@ def claim_voucher():
         length = len(str(row['voucherLimit']))
 
         # format the number
-        temp = format(row['currentVoucherCount'], '0' + str(length) + 'd')
-        barcode = row["code"] + str(temp)
+        currentVoucherCount = format(row['currentVoucherCount'], '0' + str(length) + 'd')
+        barcode = row["code"] + str(currentVoucherCount)
 
         # save edits
         sql = " INSERT INTO tbl_user_voucher(userId, voucherId, redeemable, barcode," \
