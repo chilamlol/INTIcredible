@@ -119,8 +119,9 @@ def show_all_upcoming_event(day):
         # Else print upcoming events within day given
         else:
             day = -abs(day)
-            sql += " >= %s"
+            sql += " BETWEEN %s AND 0 "
 
+        print(sql)
         rows = readAllRecord(sql, day)
 
         if not rows:
