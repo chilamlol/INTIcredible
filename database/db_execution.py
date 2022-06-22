@@ -17,13 +17,13 @@ def readOneRecord(sql, parameter):
         conn.close()
 
 
-def readNestedRecord(sql):
+def readNestedRecord(sql, data = None):
     conn = None
     cursor = None
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, data)
         return cursor.fetchone()
     except Exception as e:
         print(e)

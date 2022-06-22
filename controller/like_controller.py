@@ -17,9 +17,9 @@ def add_like():
         _postId = _json['postId']
 
         # save edits
-        sql = " INSERT INTO tbl_like(userId, postId) VALUES(%s, %s)"
+        sql = " INSERT INTO tbl_like(userId, postId,status) VALUES(%s, %s,%s)"
 
-        data = (_userId, _postId)
+        data = (_userId, _postId,1)
 
         if createRecord(sql, data) > 0:
             resp = jsonify(message='Like added successfully')
@@ -39,11 +39,11 @@ def add_like():
 
 
 # Delete like
-@app.route('/like/delete/<int:postId>/<int:userId>', methods=['DELETE'])
+@app.route('/like/unlike/<int:postId>/<int:userId>', methods=['DELETE'])
 # @token_required
 def delete_like(postId, userId):
     try:
-        sql = "DELETE FROM tbl_like WHERE postId = %s, userId = %s"
+        sql = "UPDATE tbl_like SET status = 0 WHERE postId = %s, userId = %s"
 
         data = (postId, userId)
 
