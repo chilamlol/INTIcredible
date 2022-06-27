@@ -62,7 +62,7 @@ def show_all_voucher_for_user(userId):
               " AND (NOW() BETWEEN tv.startDate AND tv.endDate) " \
               " GROUP BY tv.voucherId " \
               " HAVING COUNT(tuv.userId = %s) < tv.voucherClaimableAmount " \
-              " AND COUNT(tuv.voucherId) < tv.voucherLimit;"
+              " AND COUNT(tuv.voucherId) < tv.voucherLimit "
 
         rows = readAllRecord(sql, userId)
 
