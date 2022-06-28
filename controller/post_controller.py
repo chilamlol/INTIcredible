@@ -9,6 +9,38 @@ from token_verifier import *
 def convertStringToDateTime(str):
     return datetime.strptime(str, '%Y-%m-%d %H:%M:%S')
 
+# list all post for admin
+@app.route('/post')
+# @token_required
+def show_all_posts():
+    try:
+        # Requires MySQL 5.7 and above
+        sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
+              " , tp.image, 'approval', tp.approval, 'createdDate', tp.createdDate, 'modifiedDate', tp.modifiedDate, " \
+              " 'status', tp.status, 'userId', tp.userId, 'userName', ta.name)) " \
+              " FROM " \
+              " tbl_post tp Join tbl_user tu on tp.userId = tu.userId join tbl_alumni ta on tu.alumniId = ta.alumniId " \
+              " ORDER BY tp.createdDate DESC "
+
+        rows = readAllRecord(sql)
+
+        if not rows:
+            return not_found()
+
+        result = []
+
+        # Convert date time format for output
+        for row in rows:
+            row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
+            result.append(row)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
 
 # create post
 @app.route('/post/add', methods=['POST'])
@@ -79,7 +111,6 @@ def show_all_post(approval):
         print(e)
         return internal_server_error(e)
 
-
 """
 # list specific active and approved post
 @app.route('/post/<int:postId>')
@@ -145,35 +176,38 @@ def show_post_by_user(approval, userId):
 
 
 # list post and their comment
-@app.route('/post/nested')
+@app.route('/post/nested/<int:userId>')
 # @token_required
-def show_all_post_nested():
+def show_all_post_nested(userId):
     try:
         # Requires MySQL 5.7 and above
         sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
-              " 'image', tp.image, 'approval', tp.approval, 'createdDate', DATE_FORMAT(tp.createdDate, '%Y-%m-%d %T'), " \
-              " 'modifiedDate', DATE_FORMAT(tp.modifiedDate, '%Y-%m-%d %T'), " \
-              " 'status', tp.status, 'userId', tp.userId, 'likeCount', likeCount, 'comment', tc.commentList)) " \
+              " 'image', tp.image, 'approval', tp.approval, 'createdDate', DATE_FORMAT(tp.createdDate, '%%Y-%%m-%%d %%T'), " \
+              " 'modifiedDate', DATE_FORMAT(tp.modifiedDate, '%%Y-%%m-%%d %%T'), " \
+              " 'status', tp.status, 'userId', tp.userId, 'likeCount', IFNULL(likeCount,0), 'comment', tc.commentList, " \
+              " 'userProfile', tu.profilePicture, 'userName', ta.name, " \
+              " 'userLike', EXISTS(SELECT 1 FROM tbl_like tl WHERE tl.postId = tp.postId and status=1 and userId=%s))) " \
               " FROM " \
-              " tbl_post tp " \
+              " tbl_post tp Join tbl_user tu on tp.userId = tu.userId join tbl_alumni ta on tu.alumniId = ta.alumniId " \
               " LEFT JOIN ( " \
-              " SELECT postId," \
-              " JSON_ARRAYAGG(JSON_OBJECT('commentId', commentId, 'text', text, 'createdDate', DATE_FORMAT(createdDate, '%Y-%m-%d %T'), " \
-              " 'modifiedDate', DATE_FORMAT(modifiedDate, '%Y-%m-%d %T'), 'status', status, 'userId', userId)) commentList " \
-              " FROM tbl_comment" \
-              " GROUP BY postId" \
+              " SELECT postId, " \
+              " JSON_ARRAYAGG(JSON_OBJECT('commentId', tc.commentId, 'text', tc.text, 'createdDate', DATE_FORMAT(tc.createdDate, '%%Y-%%m-%%d %%T'), " \
+              " 'modifiedDate', DATE_FORMAT(tc.modifiedDate, '%%Y-%%m-%%d %%T'), 'status', tc.status, 'userId', " \
+              " tc.userId,'userProfile', tu.profilePicture,'userName',ta.name)) commentList " \
+              " FROM tbl_comment tc Join tbl_user tu on tc.userId = tu.userId join tbl_alumni ta on tu.alumniId = ta.alumniId " \
+              " GROUP BY postId " \
               " ) tc ON tp.postId = tc.postId " \
               " LEFT JOIN ( " \
               " SELECT postId, count(userId) AS 'likeCount' " \
-              " FROM tbl_like " \
-              " GROUP BY postId" \
+              " FROM tbl_like where status=1" \
+              " GROUP BY postId " \
               " ) tl ON tp.postId = tl.postId " \
               " WHERE tp.status = 1 AND tp.approval = 1 " \
-              " ORDER BY tp.createdDate desc "
+              " ORDER BY tp.createdDate DESC "
 
-        row = readNestedRecord(sql)
+        row = readNestedRecord(sql, userId)
 
-        if row[0] is None:
+        if row is None:
             return not_found()
 
         # Convert list to string to remove unwanted characters

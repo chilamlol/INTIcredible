@@ -92,12 +92,12 @@ def verifyUser():
                             return jsonify(loginStatus=loginStatus.Success.value, userID=row['userId'],
                                            activationStatus=row['activationStatus'], name=row['name'], token=token, userRole=row['userRoleId'],alumniID=row['alumniId'])
                         else:
-                            return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,alumniID=0)
+                            return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,name="",token="",userRole=0,alumniID=0)
                     else:
-                        return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,alumniID=0)  # Invalid credential
+                        return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,name="",token="",userRole=0,alumniID=0)  # Invalid credential
 
                 else:
-                    return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,alumniID=0)  # Invalid credential
+                    return jsonify(loginStatus=loginStatus.Invalid.value, userID=0, activationStatus=0,name="",token="",userRole=0,alumniID=0)  # Invalid credential
 
         return bad_request()
     except Exception as e:

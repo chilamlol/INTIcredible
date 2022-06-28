@@ -32,7 +32,7 @@ def add_voucher():
               " startDate, endDate, createdDate, modifiedDate, status) VALUES (%s, %s, %s, " \
               " %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW(), 1)"
         data = (_merchantId, _code, _title, _description, _image, _expiryType, _expiryDate,
-                _expiryDate, _voucherClaimableAmount, _voucherLimit, _startDate, _endDate)
+                _expiryDay, _voucherClaimableAmount, _voucherLimit, _startDate, _endDate)
 
         if createRecord(sql, data) > 0:
             resp = jsonify(message='Voucher added successfully')
@@ -62,7 +62,7 @@ def show_all_voucher_for_user(userId):
               " AND (NOW() BETWEEN tv.startDate AND tv.endDate) " \
               " GROUP BY tv.voucherId " \
               " HAVING COUNT(tuv.userId = %s) < tv.voucherClaimableAmount " \
-              " AND COUNT(tuv.voucherId) < tv.voucherLimit;"
+              " AND COUNT(tuv.voucherId) < tv.voucherLimit "
 
         rows = readAllRecord(sql, userId)
 
@@ -95,7 +95,7 @@ def show_all_voucher_for_user(userId):
 def list_user_claimed_voucher(voucherStatus, userId):
     try:
         sql = " SELECT tv.title, tv.description, tv.image, " \
-              " tm.name, tm.logo, tuv.* " \
+              " tm.name AS 'merchantName', tm.logo AS 'merchantLogo', tuv.* " \
               " FROM tbl_user_voucher tuv " \
               " LEFT JOIN tbl_voucher tv " \
               " ON tuv.voucherId = tv.voucherId " \
@@ -124,7 +124,7 @@ def list_user_claimed_voucher(voucherStatus, userId):
         return internal_server_error(e)
 
 
-# valid voucher
+# validate voucher
 @app.route('/voucher/validate/<int:voucherId>')
 #@token_required
 def validate_voucher_claim(voucherId):
@@ -170,8 +170,7 @@ def claim_voucher():
               " FROM tbl_voucher tv " \
               " JOIN tbl_user_voucher tuv " \
               " ON tv.voucherId = tuv.voucherId " \
-              " WHERE tv.voucherId = %s " \
-              " GROUP BY tv.voucherId "
+              " WHERE tv.voucherId = %s "
         row = readOneRecord(sql, _voucherId)
 
         if not row:
@@ -189,8 +188,8 @@ def claim_voucher():
         length = len(str(row['voucherLimit']))
 
         # format the number
-        temp = format(row['currentVoucherCount'], '0' + str(length) + 'd')
-        barcode = row["code"] + str(temp)
+        currentVoucherCount = format(row['currentVoucherCount'], '0' + str(length) + 'd')
+        barcode = row["code"] + str(currentVoucherCount)
 
         # save edits
         sql = " INSERT INTO tbl_user_voucher(userId, voucherId, redeemable, barcode," \

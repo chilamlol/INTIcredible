@@ -81,11 +81,25 @@ def change_admin_password(username):
 def reset_user_password(userId):
     try:
         _json = request.json
+
         _password = _json['password']
+
         if _password and request.method == 'PUT':
 
-            sql = "UPDATE tbl_user SET password=%s, activationStatus= CASE WHEN activationStatus = 0 THEN 10 ELSE activationStatus END WHERE userId=%s"
+            # Check if password no changes
+            sql = " SELECT * FROM tbl_user WHERE password = %s AND  userId = %s "
             data = (_password, userId)
+
+            row = readOneRecord(sql, data)
+
+            # if return row, then password is the same
+            if row:
+                resp = jsonify(message = 'Password remain unchange')
+                resp.status_code = 202
+                return resp
+
+            # Update data
+            sql = " UPDATE tbl_user SET password=%s, activationStatus= CASE WHEN activationStatus = 0 THEN 10 ELSE activationStatus END WHERE userId=%s "
 
             # if update successful return code 200
             if updateRecord(sql, data) > 0:
@@ -133,13 +147,15 @@ def update_user_profile(userId):
         return internal_server_error(e)
 
 
-# get userId and email by username
-@app.route("/account/info/<string:username>")
-def get_user_info_and_email_by_username(username):
+# get user info by username or userId
+@app.route("/account/info/<string:userIdOrUsername>")
+def get_user_info_by_username_or_userId(userIdOrUsername):
     try:
-        sql = "SELECT tu.*, ta.personalEmail FROM tbl_user tu JOIN tbl_alumni ta ON tu.username = ta.studentId WHERE tu.username=%s"
+        sql = " SELECT tu.*, ta.personalEmail, ta.studentHandphone, ta.studentTelephoneNumber " \
+              " FROM tbl_user tu JOIN tbl_alumni ta ON tu.username = ta.studentId WHERE tu.username=%s OR tu.userId=%s"
+        data = (userIdOrUsername, userIdOrUsername)
 
-        row = readOneRecord(sql, username)
+        row = readOneRecord(sql, data)
 
         if not row:
             return not_found()

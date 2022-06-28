@@ -19,13 +19,12 @@ def add_notification():
         _title = _json['title']
         _description = _json['description']
         _image = _json['image']
-        _push = _json['push']
 
         # save edits
         sql = " INSERT INTO tbl_notification(title, description, image, push, " \
-              " createdDate, modifiedDate, status) VALUES (%s, %s, %s, %s, NOW(), NOW(), 1) "
+              " createdDate, modifiedDate, status) VALUES (%s, %s, %s, 0, NOW(), NOW(), 1) "
 
-        data = (_title, _description, _image, _push)
+        data = (_title, _description, _image)
 
         if createRecord(sql, data) > 0:
             resp = jsonify(message='Notification added successfully')

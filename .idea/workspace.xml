@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="bug fix">
+    <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/account_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/account_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/login_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/login_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token_verifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/token_verifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/event_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller/event_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_evaluator.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_evaluator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/collaborative_filtering_result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/static/collaborative_filtering_result.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,48 +152,11 @@
       <workItem from="1655462886415" duration="13067000" />
       <workItem from="1655483521307" duration="416000" />
       <workItem from="1655488346518" duration="2094000" />
-    </task>
-    <task id="LOCAL-00007" summary="Refactored the code and bugfix and error handling added">
-      <created>1648146346087</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1648146346087</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Update readme.md and merge local with remote">
-      <created>1648146384095</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1648146384095</updated>
-    </task>
-    <task id="LOCAL-00009" summary="added username in response body for login, added new controller for account activation">
-      <created>1648146415136</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1648146415136</updated>
-    </task>
-    <task id="LOCAL-00010" summary="added new route in route.py for account_controller.py">
-      <created>1648146780919</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1648146780919</updated>
-    </task>
-    <task id="LOCAL-00011" summary="edit on error handling">
-      <created>1648186098949</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1648186098949</updated>
-    </task>
-    <task id="LOCAL-00012" summary="added new route for account info query">
-      <created>1648186602538</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1648186602538</updated>
+      <workItem from="1655649494973" duration="10593000" />
+      <workItem from="1655700824066" duration="13000" />
+      <workItem from="1655722864887" duration="14966000" />
+      <workItem from="1655744934554" duration="27000" />
+      <workItem from="1655816156229" duration="1559000" />
     </task>
     <task id="LOCAL-00013" summary="edit error message">
       <created>1648187101276</created>
@@ -496,7 +459,49 @@
       <option name="project" value="LOCAL" />
       <updated>1655481009962</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="bug fix">
+      <created>1655657969698</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1655657969698</updated>
+    </task>
+    <task id="LOCAL-00057" summary="added machine learning on event">
+      <created>1655663105908</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1655663105908</updated>
+    </task>
+    <task id="LOCAL-00058" summary="updated requirements.txt">
+      <created>1655663154097</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1655663154098</updated>
+    </task>
+    <task id="LOCAL-00059" summary="added machine learning">
+      <created>1655736108972</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1655736108973</updated>
+    </task>
+    <task id="LOCAL-00060" summary="added popular event list">
+      <created>1655743940004</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1655743940004</updated>
+    </task>
+    <task id="LOCAL-00061" summary="added popular event list">
+      <created>1655744955173</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1655744955173</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,10 +521,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added JWT testing" />
-    <MESSAGE value="missing library" />
-    <MESSAGE value="added JWT" />
-    <MESSAGE value="added library" />
     <MESSAGE value="added post API" />
     <MESSAGE value="edit message" />
     <MESSAGE value="added requirements.txt" />
@@ -541,6 +542,10 @@
     <MESSAGE value="added voucher redemption" />
     <MESSAGE value="added user wallet" />
     <MESSAGE value="bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
+    <MESSAGE value="added machine learning on event" />
+    <MESSAGE value="updated requirements.txt" />
+    <MESSAGE value="added machine learning" />
+    <MESSAGE value="added popular event list" />
+    <option name="LAST_COMMIT_MESSAGE" value="added popular event list" />
   </component>
 </project>
