@@ -106,7 +106,7 @@ def update_alumni(alumniId):
 
         data = (_name, _identificationCard, _studentId, _personalEmail, _studentHandphone,
                 _studentTelephoneNumber, _graduatingCampus, _yearOfGraduation,
-                _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy, _image, alumniId)
+                _graduatingProgramme, _graduatedProgrammeName, _levelOfStudy, alumniId)
 
         if updateRecord(sql, data) > 0:
             resp = jsonify(message='Alumni updated successfully!')
