@@ -16,19 +16,36 @@ def add_like():
         _userId = _json['userId']
         _postId = _json['postId']
 
-        # save edits
-        sql = " INSERT INTO tbl_like(userId, postId,status) VALUES(%s, %s,%s)"
+        # Check if user liked
+        sql = " SELECT * FROM tbl_like WHERE userId=%s AND postId=%s "
+        data = (_userId,_postId)
+        row = readOneRecord(sql, data)
 
-        data = (_userId, _postId,1)
+        # User havent liked previously
+        if not row:
+            sql = " INSERT INTO tbl_like(userId, postId, status) VALUES(%s, %s, 1)"
+            data = (_userId, _postId)
 
-        if createRecord(sql, data) > 0:
-            resp = jsonify(message='Like added successfully')
-            resp.status_code = 201
-            return resp
-        else:
+            if createRecord(sql, data) > 0:
+                resp = jsonify(message='Like added successfully')
+                resp.status_code = 201
+                return resp
+
+        # User has ald liked
+        if row['status'] == 1:
             resp = jsonsify(message='User already liked')
             resp.status_code = 400
             return resp
+        # User liked previously
+        else:
+            # UPDATE like status to 1
+            sql = " UPDATE tbl_like SET status=1 WHERE userId=%s AND postId=%s"
+            data=(_userId,_postId)
+
+            if updateRecord(sql, data) > 0:
+                resp = jsonify(message='Like updated successfully')
+                resp.status_code = 200
+                return resp
 
         # Return error if missing parameter
         return bad_request()
@@ -38,13 +55,12 @@ def add_like():
         return internal_server_error(e)
 
 
-# Delete like
-@app.route('/like/unlike/<int:postId>/<int:userId>', methods=['DELETE'])
+# unlike
+@app.route('/like/unlike/<int:postId>/<int:userId>', methods=['POST'])
 # @token_required
 def delete_like(postId, userId):
     try:
-        sql = "UPDATE tbl_like SET status = 0 WHERE postId = %s, userId = %s"
-
+        sql = "UPDATE tbl_like SET status = 0 WHERE postId = %s AND userId = %s"
         data = (postId, userId)
 
         if updateRecord(sql, data) > 0:

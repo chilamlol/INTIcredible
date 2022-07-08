@@ -23,9 +23,22 @@ def activate_user_account(userId):
         print(e)
         return internal_server_error(e)
 
+# List admins
+@app.route("/account/admin")
+#@is_super_admin
+def show_admins():
+    try:
+        sql = "SELECT * FROM tbl_user WHERE userRoleId = 3"
+        rows = readAllRecord(sql)
+        resp = jsonify(rows)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
 
 # Create Admin
-@app.route("/account/add-admin", methods=['POST'])
+@app.route("/account/admin/add", methods=['POST'])
 #@is_super_admin
 def add_admin():
     try:
