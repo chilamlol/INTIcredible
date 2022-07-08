@@ -33,9 +33,10 @@ def add_like():
 
         # User has ald liked
         if row['status'] == 1:
-            resp = jsonsify(message='User already liked')
+            resp = jsonify(message='User already liked')
             resp.status_code = 400
             return resp
+
         # User liked previously
         else:
             # UPDATE like status to 1
