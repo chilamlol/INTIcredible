@@ -17,7 +17,7 @@ API key is using JWT hashed GUID.
 
 <br />
 
-## To run the system
+## Run the system on local
 **Install library**
 ```
 pip install -r /path/to/requirements.txt
@@ -27,17 +27,19 @@ pip install -r /path/to/requirements.txt
 python route.py
 ```
 
-### Docker
+## Run the system with Docker
 * Default host = localhost
 * Default port = 5000
 
-\
-**How to Dockerize it?**
+<br />
+
+**How to build Docker image?**
 ```
-docker build --tag INTIcredibles-docker .      
+docker image build -t yourimagename
 ```
+
 \
 **How to run in Docker?**
 ```
-docker run --restart=always -d -p 5000:5000 INTIcredibles-docker
+docker run --restart=always -d -p 5000:5000 yourimagename
 ```

@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32e92336-95d4-421f-aa91-8be1e2860cb8" name="Changes" comment="updated sample size to 50">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/collaborative_filtering_result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/static/collaborative_filtering_result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route.py" beforeDir="false" afterPath="$PROJECT_DIR$/route.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +53,7 @@
       <recent name="C:\Users\Admin\Desktop\flaskProject" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.flask-project">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="flaskProject" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -66,6 +68,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="flask-project" type="PythonConfigurationType" factoryName="Python">
+      <module name="flask-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -161,6 +185,8 @@
       <workItem from="1656323601014" duration="1995000" />
       <workItem from="1656350772733" duration="621000" />
       <workItem from="1657269366178" duration="85000" />
+      <workItem from="1657274452173" duration="364000" />
+      <workItem from="1657274933241" duration="184000" />
     </task>
     <task id="LOCAL-00014" summary="added new API for upcoming event">
       <created>1648364729786</created>
