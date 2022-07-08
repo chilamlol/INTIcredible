@@ -46,6 +46,42 @@ def add_voucher():
         return internal_server_error(e)
 
 
+# list all voucher admin
+@app.route('/voucher')
+# @is_admin
+def show_admin_voucher():
+    try:
+        sql = " SELECT tv.*, tm.name AS 'merchantName' " \
+              " FROM (tbl_voucher tv " \
+              " LEFT JOIN tbl_merchant tm" \
+              " ON tm.merchantId = tv.merchantId) " \
+              " WHERE tv.status = 1 " \
+              " AND tm.status = 1 "
+
+        rows = readAllRecord(sql)
+
+        if not rows:
+            resp = jsonify(message="No claimable voucher for user")
+            resp.status_code = 400
+            return resp
+
+        result = []
+
+        # Convert date time format for output
+        for row in rows:
+            row['startDate'] = row['startDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['endDate'] = row['endDate'].strftime("%Y-%m-%d %H:%M:%S")
+            row['createdDate'] = row['createdDate'].strftime("%Y-%m-%d %H:%M:%S")  # 2022-03-25 17:14:20
+            row['modifiedDate'] = row['modifiedDate'].strftime("%Y-%m-%d %H:%M:%S")
+            result.append(row)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(e)
+        return internal_server_error(e)
+
 # list all claimable voucher for the user
 @app.route('/voucher/<int:userId>')
 # @token_required

@@ -11,15 +11,16 @@ def convertStringToDateTime(str):
 
 # list all post for admin
 @app.route('/post')
-# @token_required
+@token_required
 def show_all_posts():
     try:
-        # Requires MySQL 5.7 and above
-        sql = " SELECT JSON_ARRAYAGG(JSON_OBJECT('postId', tp.postId, 'text', tp.text, 'file', tp.file, " \
-              " , tp.image, 'approval', tp.approval, 'createdDate', tp.createdDate, 'modifiedDate', tp.modifiedDate, " \
-              " 'status', tp.status, 'userId', tp.userId, 'userName', ta.name)) " \
-              " FROM " \
-              " tbl_post tp Join tbl_user tu on tp.userId = tu.userId join tbl_alumni ta on tu.alumniId = ta.alumniId " \
+        sql = " SELECT tp.*, ta.name AS 'alumniName' " \
+              " FROM (tbl_post tp " \
+              " LEFT JOIN tbl_user tu " \
+              " ON tp.userId = tu.userId" \
+              " LEFT JOIN tbl_alumni ta" \
+              " ON tu.alumniId = ta.alumniId) " \
+              " WHERE tp.status = 1 " \
               " ORDER BY tp.createdDate DESC "
 
         rows = readAllRecord(sql)
